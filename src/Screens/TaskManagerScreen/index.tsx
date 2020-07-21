@@ -2,10 +2,11 @@ import * as React from 'react';
 import { Progress } from "reactstrap";
 
 export const TaskManagerScreen: React.FC<{}> = (props) => {
+
     React.useEffect(() => {
-        console.log(props)
+
     }, [props])
-    
+
     return <div>
         <div className="page-header">
             <h3 className="page-title"> Basic Tables </h3>

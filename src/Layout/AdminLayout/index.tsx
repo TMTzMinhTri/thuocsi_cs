@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Route, useRouteMatch, useParams, Link } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
 import * as  Screens from "Screens";
 
 import { SideBar } from "./SideBar";
@@ -7,8 +7,7 @@ import { NavBar } from "./NavBar";
 import { Footer } from "./Footer";
 
 const AdminLayout: React.SFC<{}> = () => {
-    let { path, url } = useRouteMatch();
-    console.log(path, url)
+    let { path } = useRouteMatch();
 
     return <div className="container-scroller">
         <NavBar />
