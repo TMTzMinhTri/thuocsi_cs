@@ -16,20 +16,8 @@ const AdminLayout: React.SFC<{}> = () => {
             <SideBar />
             <div className="main-panel">
                 <div className="content-wrapper">
-                    <ul>
-                        <li>
-                            <Link to={`${url}/rendering`}>Rendering with React</Link>
-                        </li>
-                        <li>
-                            <Link to={`${url}/components`}>Components</Link>
-                        </li>
-                        <li>
-                            <Link to={`${url}/props-v-state`}>Props v. State</Link>
-                        </li>
-                    </ul>
                     <Switch>
-                        <Route exact path={path} component={Screens.TaskManagerScreen} />
-                        {/* <Route path={`${path}/abc`} component={Screens.TaskManagerScreen} /> */}
+                        <Route path={`${path}/task-manager`} component={Screens.TaskManagerScreen} />
                         <Route path={`${path}/:topicId`}>
                             <Topic />
                         </Route>

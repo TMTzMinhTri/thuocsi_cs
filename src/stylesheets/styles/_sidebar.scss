@@ -7,10 +7,14 @@
   padding: 0;
   width: $sidebar-width-lg;
   z-index: 11;
-  transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
-  -webkit-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
-  -moz-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
-  -ms-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+  transition: width $action-transition-duration $action-transition-timing-function,
+    background $action-transition-duration $action-transition-timing-function;
+  -webkit-transition: width $action-transition-duration $action-transition-timing-function,
+    background $action-transition-duration $action-transition-timing-function;
+  -moz-transition: width $action-transition-duration $action-transition-timing-function,
+    background $action-transition-duration $action-transition-timing-function;
+  -ms-transition: width $action-transition-duration $action-transition-timing-function,
+    background $action-transition-duration $action-transition-timing-function;
   .sidebar-brand-wrapper {
     width: auto;
     height: $navbar-height;
@@ -126,12 +130,8 @@
         &:hover {
           color: darken($sidebar-light-menu-color, 5%);
         }
-      }
-
-      &.active {
-        >.nav-link {
+        &.active {
           color: $sidebar-light-menu-active-color;
-
           .menu-title,
           i {
             color: inherit;
@@ -145,64 +145,62 @@
           flex-direction: column;
           height: auto;
 
-            .profile-image {
-              width: 40px;
-              height: 40px;
+          .profile-image {
+            width: 40px;
+            height: 40px;
 
-              img {
-                border-radius: 100%;
-                max-width: 100%;
-              }
+            img {
+              border-radius: 100%;
+              max-width: 100%;
             }
+          }
 
-            .text-wrapper {
-              margin-left: 15px;
+          .text-wrapper {
+            margin-left: 15px;
 
-              .rtl & {
-                margin-left: 0;
-                margin-right: 15px;
-              }
-
+            .rtl & {
+              margin-left: 0;
+              margin-right: 15px;
             }
+          }
 
-            .profile-name {
-              font-weight: 500;
-              margin-bottom: 7px;
-              line-height: 1;
-            }
+          .profile-name {
+            font-weight: 500;
+            margin-bottom: 7px;
+            line-height: 1;
+          }
 
-            .designation {
-              margin-right: 3px;
-              line-height: 1;
-            }
-            .dropdown {
-              .dropdown-toggle {
-                &.arrow-hide {
-                  &:after {
-                    display: none;
-                  }
+          .designation {
+            margin-right: 3px;
+            line-height: 1;
+          }
+          .dropdown {
+            .dropdown-toggle {
+              &.arrow-hide {
+                &:after {
+                  display: none;
                 }
               }
-              
             }
-            .dropdown {
-              position: unset;
+          }
+          .dropdown {
+            position: unset;
 
-              .user-switch-dropdown-toggler {
-                display: flex;
-                flex-direction: row;
-                padding: 1px 0px;
-                margin-bottom: 30px;
-                &:focus {
-                  outline: 0;
-                  box-shadow: none;
-                }
-              }
-
-              .dropdown-menu {
-                top: 0;
+            .user-switch-dropdown-toggler {
+              display: flex;
+              flex-direction: row;
+              padding: 1px 0px;
+              margin-bottom: 30px;
+              &:focus {
+                outline: 0;
+                box-shadow: none;
               }
             }
+
+            .dropdown-menu {
+              top: 0;
+            }
+          }
         }
       }
       &.not-navigation-link {
@@ -211,10 +209,10 @@
     }
 
     &:not(.sub-menu) {
-      >.nav-item {
+      > .nav-item {
         &:hover {
           &:not(.nav-profile) {
-            >.nav-link {
+            > .nav-link {
               background: $sidebar-light-menu-hover-bg;
               color: $sidebar-light-menu-hover-color;
             }
@@ -246,7 +244,7 @@
         }
 
         &:hover {
-          >.nav-link {
+          > .nav-link {
             background: $sidebar-light-submenu-hover-bg;
             color: $sidebar-light-submenu-hover-color;
 
@@ -267,7 +265,6 @@
 
     .nav {
       .nav-item {
-
         .collapse.show,
         .collapsing {
           background: $sidebar-dark-menu-active-bg;
@@ -311,7 +308,7 @@
               background: $sidebar-dark-profile-name-color;
             }
 
-            >span {
+            > span {
               background: $sidebar-dark-menu-active-bg;
 
               i {
@@ -322,7 +319,7 @@
         }
 
         &.active {
-          >.nav-link {
+          > .nav-link {
             color: $sidebar-dark-menu-active-color;
           }
         }
@@ -333,10 +330,10 @@
       }
 
       &:not(.sub-menu) {
-        >.nav-item {
+        > .nav-item {
           &:hover {
             &:not(.nav-profile) {
-              >.nav-link {
+              > .nav-link {
                 background: $sidebar-dark-menu-hover-bg;
                 color: $sidebar-dark-menu-hover-color;
               }
@@ -360,7 +357,7 @@
           }
 
           &:hover {
-            >.nav-link {
+            > .nav-link {
               background: $sidebar-dark-submenu-hover-bg;
               color: $sidebar-dark-submenu-hover-color;
 

@@ -5,6 +5,7 @@ export const TaskManagerScreen: React.FC<{}> = (props) => {
     React.useEffect(() => {
         console.log(props)
     }, [props])
+    
     return <div>
         <div className="page-header">
             <h3 className="page-title"> Basic Tables </h3>
@@ -15,6 +16,7 @@ export const TaskManagerScreen: React.FC<{}> = (props) => {
                 </ol>
             </nav>
         </div>
+
         <div className="row">
             <div className="col-lg-6 grid-margin stretch-card">
                 <div className="card">
