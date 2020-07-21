@@ -10,7 +10,7 @@ export const App = () => {
     <React.Suspense fallback={<Loading />}>
       <Switch>
         <Route exact path="/" render={() => <Redirect to="/admin" />} />
-        <Route exact path="/admin" component={AdminLayout} />
+        <Route path="/admin" component={AdminLayout} />
         <Route exact path="/login" component={LoginScreen} />
       </Switch>
     </React.Suspense>
