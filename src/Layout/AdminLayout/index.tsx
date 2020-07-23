@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, useParams, Redirect } from 'react-router-dom';
 import * as  Screens from "Screens";
 
 import { SideBar } from "./SideBar";
@@ -20,6 +20,7 @@ const AdminLayout: React.SFC<{}> = () => {
                         <Route path={`${path}/:topicId`}>
                             <Topic />
                         </Route>
+                        <Redirect to={`${path}/task-manager`} />
                     </Switch>
                 </div>
                 <Footer />
