@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Redirect, } from "react-router-dom";
 import { Loading } from "Components";
 import { PrivateRoute } from 'Components/PrivateRoute';
 import { connect } from 'react-redux';
@@ -28,9 +28,12 @@ const AppComponent: React.FC<IProps> = ({ layoutState, getUser }) => {
   return <Router>
     <React.Suspense fallback={<Loading />}>
       <Switch>
-        <Route path="/login" component={LoginScreen} />
-        <PrivateRoute path="/admin" component={AdminLayout} loading={layoutState.loading} isAuthenticated={layoutState.isAuthenticated} />
-        <Route path="/" render={() => <Redirect to="/admin" />} />
+        <Route path="/" exact render={() => <Redirect to="/admin" />} />
+        <PrivateRoute path="/admin"
+          component={AdminLayout}
+          loading={layoutState.loading}
+          isAuthenticated={layoutState.isAuthenticated} />
+        <Route path="/login" exact component={LoginScreen} />
       </Switch>
     </React.Suspense>
   </Router>

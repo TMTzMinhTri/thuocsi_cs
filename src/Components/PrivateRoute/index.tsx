@@ -6,10 +6,11 @@ interface IPrivateRoute {
     component: React.SFC,
     path: string,
     loading: boolean,
-    isAuthenticated: boolean
+    isAuthenticated: boolean,
 }
 
 export const PrivateRoute: React.FC<IPrivateRoute> = ({ component: Component, loading, ...rest }) => {
+    console.log(rest.isAuthenticated)
     return <Route {...rest}
         render={({ location }) => loading
             ? <Spinner />

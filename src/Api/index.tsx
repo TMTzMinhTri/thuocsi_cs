@@ -20,5 +20,8 @@ export const Api = {
     },
     get(url: string) {
         return this.httpRequest("GET", url)
+    },
+    post(url: string, body: Object) {
+        return this.httpRequest("POST", url, body)
     }
 }
