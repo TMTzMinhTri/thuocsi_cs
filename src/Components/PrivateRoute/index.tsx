@@ -10,7 +10,6 @@ interface IPrivateRoute {
 }
 
 export const PrivateRoute: React.FC<IPrivateRoute> = ({ component: Component, loading, ...rest }) => {
-    console.log(rest.isAuthenticated)
     return <Route {...rest}
         render={({ location }) => loading
             ? <Spinner />

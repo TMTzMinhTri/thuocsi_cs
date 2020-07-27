@@ -25,7 +25,6 @@ const getListTask = () => (dispatch: Dispatch<RootAction>) => {
     data.per_page
   ).then((rsp: any) => {
     if (rsp.status === 200) {
-      console.log('asd')
       dispatch({ type: GET_LIST_TASK_SUCCESS, payload: rsp.data });
     }
   });

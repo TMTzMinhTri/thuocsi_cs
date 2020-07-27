@@ -14,12 +14,9 @@ interface IState {
     isAuthenticated: boolean
 }
 
-
 const mapState = (state: RootState): IState => ({
     isAuthenticated: state.layout.isAuthenticated
 })
-
-
 
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
     signIn
@@ -29,15 +26,10 @@ const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
 type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction>
 
 const LoginScreen: React.FC<Iprops> = ({ isAuthenticated, signIn }) => {
-
-    React.useEffect(() => {
-        console.log(isAuthenticated)
-    }, [isAuthenticated])
-
     const submitLogin = (values: { login: string; password: string; }) => {
-        console.log('aa')
         signIn(values)
     }
+    
     const form_validation = (values: { login: string; password: string; }) => {
         const errors = {} as any;
         if (!values.login) {

@@ -1,2 +1,4 @@
 import { BaseInput } from './BaseInput';
-export { BaseInput };
+import { RadioInput } from './RadioInput';
+
+export { BaseInput, RadioInput };
