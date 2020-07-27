@@ -27,10 +27,10 @@ export const NavBarComponent: React.SFC<Iprops> = ({ user, signOut }) => {
                 <i className="fa fa-bars" aria-hidden="true"></i>
             </button>
             <ul className="navbar-nav navbar-nav-right ml-lg-auto">
-                <li className="nav-item  nav-profile border-0">
+                <li className="nav-item nav-profile border-0">
                     <UncontrolledDropdown>
-                        <DropdownToggle className="bg-transparent">
-                            <span className="profile-text toast-body mr-1">{user && user.name}</span>
+                        <DropdownToggle className="bg-transparent nav-link">
+                            <span className="toast-body">{user && user.name}</span>
                             <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                         </DropdownToggle>
                         <DropdownMenu className="preview-list navbar-dropdown pb-3" right>

@@ -11,7 +11,7 @@ const getListTask = () => (dispatch: Dispatch<RootAction>) => {
     user_id: null,
     so_id: null,
     page: 1,
-    per_page: 10,
+    per_page: 30,
     status: null,
   };
   get_list_cs_task(

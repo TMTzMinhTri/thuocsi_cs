@@ -4,9 +4,10 @@ import { RootState } from 'Store';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RootAction } from 'Interface/Store/index.types';
 import { getListTask } from 'Store/actions/task_manager.actions';
-import { Spinner } from 'reactstrap';
+import { Spinner, Card, CardBody, CardTitle } from 'reactstrap';
 import { useRouteMatch } from 'react-router-dom';
 import { TaskBoard } from './TaskBoard';
+import { FilterControl } from './FilterControl';
 
 const mapState = (state: RootState) => ({
   task_manager_state: state.task_manager
@@ -28,7 +29,17 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
   return <div>
     {task_manager_state.loading === true
       ? <Spinner />
-      : <TaskBoard cs_tasks={task_manager_state.cs_tasks} path={path} />}
+      : <div className="row">
+        <div className="col-lg-12 stretch-card">
+          <Card>
+            <CardBody>
+              <CardTitle><h4>Task manager</h4></CardTitle>
+              <FilterControl />
+              <TaskBoard cs_tasks={task_manager_state.cs_tasks} path={path} />
+            </CardBody>
+          </Card>
+        </div>
+      </div>}
   </div>
 }
 

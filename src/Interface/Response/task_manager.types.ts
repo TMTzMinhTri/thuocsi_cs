@@ -12,13 +12,13 @@ export interface IBankInfomation {
 }
 
 export interface Icstasks {
-  id: string;
-  so_id: string;
-  order_id: string;
+  id: number;
+  so_id: number;
+  order_id: number;
   order_status: string;
   status: string;
   code: string;
-  return_id: string;
+  return_id: number;
   quantity_counter: number;
   total: number;
   failure_types: string[];
@@ -42,14 +42,14 @@ export interface Icstasks {
   feedback_image_urls: string[];
   bank_information: IBankInfomation;
   user_name: string;
-  assigned_member_id: string;
+  assigned_member_id: number;
   following_cs_name: string;
-  following_cs_id: string;
+  following_cs_id: number;
   qc_by: string;
 }
 
 export interface IUserDetail {
-  id: string;
+  id: number;
   phone: string;
   email: string;
   name: string;

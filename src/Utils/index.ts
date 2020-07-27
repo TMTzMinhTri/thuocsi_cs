@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+
 export enum StatusTask {
   pending = 'pending',
   assigned = 'assigned',
@@ -5,3 +7,19 @@ export enum StatusTask {
   done = 'done',
   canceled = 'canceled',
 }
+
+class Utils {
+  public getQueryparams(keys: string[]) {
+    const query = this.queryParams();
+    let params = {} as any;
+    keys.forEach((key) => {
+      return (params[key] = query.get(key));
+    });
+    return params;
+  }
+  private queryParams() {
+    return new URLSearchParams(useLocation().search);
+  }
+}
+
+export default new Utils();

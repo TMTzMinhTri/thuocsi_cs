@@ -4,7 +4,7 @@ import * as  Screens from "Screens";
 
 import { SideBar } from "./SideBar";
 import { NavBar } from "./NavBar";
-import { Footer } from "./Footer";
+// import { Footer } from "./Footer";
 
 const AdminLayout: React.SFC<{}> = () => {
     let { path } = useRouteMatch();
@@ -23,7 +23,7 @@ const AdminLayout: React.SFC<{}> = () => {
                         <Redirect to={`${path}/task-manager`} />
                     </Switch>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </div>
     </div>
