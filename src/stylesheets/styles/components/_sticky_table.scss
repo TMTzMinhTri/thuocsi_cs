@@ -1,6 +1,6 @@
 .sticky_table {
     overflow-y: auto;
-    height: calc(100vh - #{$navbar-height} - 10rem);
+    height: calc(100vh - #{$navbar-height} - 13rem);
     thead {
         th {
             position: sticky;

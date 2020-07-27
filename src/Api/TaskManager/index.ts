@@ -1,29 +1,12 @@
 import { Api } from '..';
+import { IResponeListTasks } from 'Interface/Response/task_manager.types';
+import { IUserInput } from 'Interface/Store/task_manager.types';
 
 export const getListAddress = () => {
   return Api.get('/api/v1/addresses/city_list');
 };
 
-export const get_list_cs_task = (
-  from: string,
-  to: string,
-  failure_type_ids: string[],
-  user_id: string | null,
-  page: number,
-  so_id: string | null,
-  status: string | null,
-  per_page: number
-) => {
+export const get_list_cs_task = (userInput: IUserInput) => {
   const path = `/api/cs/v1/cs_tasks/list`;
-  const data = {
-    from,
-    to,
-    failure_type_ids,
-    user_id,
-    so_id: so_id ? so_id : null,
-    page,
-    per_page: per_page,
-    status: status === 'all' ? null : status,
-  };
-  return Api.post(path, data);
+  return Api.post<IResponeListTasks>(path, userInput);
 };

@@ -3,43 +3,60 @@ import { connect } from 'react-redux';
 import { RootState } from 'Store';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RootAction } from 'Interface/Store/index.types';
-import { getListTask } from 'Store/actions/task_manager.actions';
-import { Spinner, Card, CardBody, CardTitle } from 'reactstrap';
-import { useRouteMatch } from 'react-router-dom';
+import { getListTask, getListTaskByFilter } from 'Store/actions/task_manager.actions';
+import { Card, CardBody, CardTitle } from 'reactstrap';
+import { useRouteMatch, RouteComponentProps } from 'react-router-dom';
 import { TaskBoard } from './TaskBoard';
 import { FilterControl } from './FilterControl';
+import * as Components from "Components";
+import { IUserInput } from 'Interface/Store/task_manager.types';
+import Utils from "Utils";
 
 const mapState = (state: RootState) => ({
   task_manager_state: state.task_manager
 })
 
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
-  getListTask
+  getListTask,
+  getListTaskByFilter
 }, dispatch)
 
-type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction>
+type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & RouteComponentProps
 
-export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task_manager_state }) => {
+export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task_manager_state, getListTaskByFilter, history }) => {
   let { path } = useRouteMatch();
+  let { name } = Utils.getQueryparams(["name"])
 
   React.useEffect(() => {
     getListTask()
   }, [getListTask])
 
-  return <div>
-    {task_manager_state.loading === true
-      ? <Spinner />
-      : <div className="row">
-        <div className="col-lg-12 stretch-card">
-          <Card>
-            <CardBody>
-              <CardTitle><h4>Task manager</h4></CardTitle>
-              <FilterControl />
-              <TaskBoard cs_tasks={task_manager_state.cs_tasks} path={path} />
-            </CardBody>
-          </Card>
-        </div>
-      </div>}
+  const handlePagination = React.useCallback((value) => {
+    const { userInput } = task_manager_state
+    const user_input: IUserInput = {
+      ...userInput,
+      page: value
+    }
+    if (name) history.replace(path)
+    getListTaskByFilter(user_input)
+  }, [getListTaskByFilter, task_manager_state, name, history, path])
+
+  return <div className="row">
+    <div className="col-lg-12 stretch-card">
+      <Card>
+        <CardBody>
+          <CardTitle><h4>Task manager</h4></CardTitle>
+          <FilterControl />
+          <TaskBoard cs_tasks={task_manager_state.cs_tasks} path={path} loading={task_manager_state.loading} />
+          <Components.PaginationBar
+            current={task_manager_state.userInput.page}
+            perpage={30}
+            totalRecords={task_manager_state.total_count}
+            size={"sm"}
+            onChangePage={(value: number) => handlePagination(value)} />
+        </CardBody>
+      </Card>
+    </div>
   </div>
 }
 
