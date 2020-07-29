@@ -10,20 +10,20 @@ import { DetailTask } from "./DetailTask";
 interface ITaskBoardProps {
    cs_tasks: Icstasks[],
    path: string,
-   loading: boolean
+   loading: boolean,
+   taskSelected: number
 }
 
 type IProps = ITaskBoardProps & RouteComponentProps
 
-const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, path, history, loading }) => {
+const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, path, history, loading, taskSelected }) => {
 
    const handleClick = (id: number) => {
       return history.replace(`${path}?name=${id}`)
    }
-
    return <div className="d-flex">
-      <div className="sticky_table table-responsive">
-         <Table className="table" hover style={{ width: "100%", tableLayout: "fixed" }}>
+      <div className="sticky_table">
+         <Table className="table" hover style={{ width: "100%", tableLayout: "fixed" }} >
             <thead>
                <tr>
                   <th style={{ width: "10%" }}>Mã ĐH</th>
@@ -41,7 +41,10 @@ const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, path, histo
                   ? renderTableRow(<Spinner />)
                   : cs_tasks.length > 0
                      ? cs_tasks.map((item, index) =>
-                        <tr key={`task_item_${index}`} onClick={() => handleClick(item.id)} className="cursor-pointer">
+                        <tr
+                           key={`task_item_${index}`}
+                           onClick={() => handleClick(item.id)}
+                           className={classnames("cursor-pointer", { "active": taskSelected === item.id })}>
                            <td>
                               <Link to={`${path}?name=${item.id}`}>{item.id}</Link>
                            </td>
@@ -60,7 +63,7 @@ const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, path, histo
             </tbody>
          </Table>
       </div>
-      <DetailTask path={path} cs_tasks={cs_tasks} />
+      <DetailTask path={path} cs_tasks={cs_tasks} loading={loading} />
    </div>
 })
 

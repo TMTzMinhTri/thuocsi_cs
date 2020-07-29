@@ -4,6 +4,12 @@ export interface IResponeListTasks {
   cs_tasks: Icstasks[];
 }
 
+export interface IResponeListReason {
+  id: number;
+  code: string;
+  name: string;
+}
+
 export interface IBankInfomation {
   account_name: string;
   account_number: string;

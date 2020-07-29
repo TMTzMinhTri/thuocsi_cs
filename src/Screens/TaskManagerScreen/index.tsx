@@ -4,7 +4,7 @@ import { RootState } from 'Store';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RootAction } from 'Interface/Store/index.types';
 import { getListTask, getListTaskByFilter } from 'Store/actions/task_manager.actions';
-import { Card, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import { useRouteMatch, RouteComponentProps } from 'react-router-dom';
 import { TaskBoard } from './TaskBoard';
 import { FilterControl } from './FilterControl';
@@ -45,9 +45,12 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
     <div className="col-lg-12 stretch-card">
       <Card>
         <CardBody>
-          <CardTitle><h4>Task manager</h4></CardTitle>
           <FilterControl />
-          <TaskBoard cs_tasks={task_manager_state.cs_tasks} path={path} loading={task_manager_state.loading} />
+          <TaskBoard
+            cs_tasks={task_manager_state.cs_tasks}
+            path={path}
+            loading={task_manager_state.loading}
+            taskSelected={parseInt(name)} />
           <Components.PaginationBar
             current={task_manager_state.userInput.page}
             perpage={30}

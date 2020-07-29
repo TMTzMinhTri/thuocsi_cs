@@ -89,6 +89,7 @@ export const PaginationBar: React.FC<IPaginationBarProps> = React.memo((props) =
     }
     const setPage = (page: number) => (event: React.MouseEvent) => {
         event.preventDefault();
+        if (page === currentPage) return
         gotoPage(page);
     }
     const pages = getPager();

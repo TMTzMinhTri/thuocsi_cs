@@ -1,11 +1,17 @@
 .sticky_table {
     overflow-y: auto;
-    height: calc(100vh - #{$navbar-height} - 13rem);
+    height: calc(100vh - #{$navbar-height} - 20rem);
+    width: 100%;
     thead {
         th {
             position: sticky;
             top: 0;
             background: $white-smoke;
+        }
+    }
+    tbody {
+        tr.active {
+            background-color: $gray-300;
         }
     }
 }
