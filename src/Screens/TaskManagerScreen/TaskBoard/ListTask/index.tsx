@@ -4,6 +4,8 @@ import classNames from "classnames";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { StatusTask } from "Utils";
 import { Icstasks } from "Interface/Response/task_manager.types";
+import * as Components from "Components";
+
 
 
 interface IListTaskProps extends RouteComponentProps {
@@ -29,15 +31,23 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
                         <td>
                             <Link to={`${path}?name=${item.id}`}>{item.id}</Link>
                         </td>
+                        <td>{item.so_id}</td>
                         <td><div style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>{item.cs_note}</div></td>
-                        <td style={{ textAlign: "right" }}>
-                            <Badge color={classNames(
-                                { primary: item.status === StatusTask.assigned },
-                                { danger: item.status === StatusTask.pending },
-                                { success: item.status === StatusTask.done },
-                                { secondary: item.status === StatusTask.canceled },
-                                { info: item.status === StatusTask.in_progress }
-                            )}>{item.status}</Badge></td>
+                        <td >
+                            <div className="d-flex justify-content-end align-items-center">
+                                <div className="d-flex flex-column align-items-end mr-2">
+                                    <Badge color={classNames(
+                                        { primary: item.status === StatusTask.assigned },
+                                        { danger: item.status === StatusTask.pending },
+                                        { success: item.status === StatusTask.done },
+                                        { secondary: item.status === StatusTask.canceled },
+                                        { info: item.status === StatusTask.in_progress }
+                                    )}>{item.status}</Badge>
+                                    <Components.TimeAgo datetime={item.created_at} />
+                                </div>
+                                <Components.Avata name={item.created_by} target={`task-${item.id}`} />
+                            </div>
+                        </td>
                     </tr>
                 )
                 : renderTableRow(<img src="https://assets.thuocsi.vn/assets/buymed/logos/logo-49156a6a8b6688f3eb1098b08d406267e8770cffd64b6f07bb31e2e52536346d.svg" alt="empty_result" />)}

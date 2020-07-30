@@ -19,6 +19,16 @@ class Utils {
     });
     return params;
   }
+
+  public stringToHslColor(name: string) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let h = hash % 360;
+    return 'hsl(' + h + ', ' + 80 + '%, ' + 80 + '%)';
+  }
+
   private queryParams() {
     return new URLSearchParams(useLocation().search);
   }

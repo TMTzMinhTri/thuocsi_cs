@@ -13,6 +13,7 @@ interface IProps extends RouteComponentProps {
 export const DetailTaskComponent: React.FC<IProps> = ({ path, cs_tasks, history, loading }) => {
     let { name } = Utils.getQueryparams(["name"])
     const task = React.useMemo(() => cs_tasks.find(item => item.id === parseInt(name)), [cs_tasks, name])
+
     React.useEffect(() => {
         if (!loading && task === undefined) {
             history.replace(path)
