@@ -1,0 +1,52 @@
+import * as React from "react";
+import { Spinner, Badge } from "reactstrap";
+import classNames from "classnames";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { StatusTask } from "Utils";
+import { Icstasks } from "Interface/Response/task_manager.types";
+
+
+interface IListTaskProps extends RouteComponentProps {
+    loading: boolean,
+    cs_tasks: Icstasks[],
+    path: string,
+    taskSelected: number
+}
+
+export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks, history, path, taskSelected }) => {
+    const handleClick = (id: number) => {
+        return history.replace(`${path}?name=${id}`)
+    }
+    return <tbody>
+        {loading
+            ? renderTableRow(<Spinner />)
+            : cs_tasks.length > 0
+                ? cs_tasks.map((item, index) =>
+                    <tr
+                        key={`task_item_${index}`}
+                        onClick={() => handleClick(item.id)}
+                        className={classNames("cursor-pointer", { "active": taskSelected === item.id })}>
+                        <td>
+                            <Link to={`${path}?name=${item.id}`}>{item.id}</Link>
+                        </td>
+                        <td><div style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>{item.cs_note}</div></td>
+                        <td style={{ textAlign: "right" }}>
+                            <Badge color={classNames(
+                                { primary: item.status === StatusTask.assigned },
+                                { danger: item.status === StatusTask.pending },
+                                { success: item.status === StatusTask.done },
+                                { secondary: item.status === StatusTask.canceled },
+                                { info: item.status === StatusTask.in_progress }
+                            )}>{item.status}</Badge></td>
+                    </tr>
+                )
+                : renderTableRow(<img src="https://assets.thuocsi.vn/assets/buymed/logos/logo-49156a6a8b6688f3eb1098b08d406267e8770cffd64b6f07bb31e2e52536346d.svg" alt="empty_result" />)}
+    </tbody>
+}
+const renderTableRow = (component: React.ReactElement) => {
+    return <tr>
+        <td>{component}</td>
+    </tr>
+}
+
+export const ListTask = withRouter(ListTaskComponent)
