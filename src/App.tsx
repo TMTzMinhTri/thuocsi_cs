@@ -12,7 +12,7 @@ const AdminLayout = React.lazy(() => import('Layout/AdminLayout/index'))
 const LoginScreen = React.lazy(() => import('Screens/LoginScreen'))
 
 const mapState = (state: RootState) => ({
-  layoutState: state.layout
+  layoutState: state.layout,
 })
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
   getUser: getCurrentUser
@@ -29,11 +29,11 @@ const AppComponent: React.FC<IProps> = ({ layoutState, getUser }) => {
     <React.Suspense fallback={<Loading />}>
       <Switch>
         <Route path="/" exact render={() => <Redirect to="/admin" />} />
+        <Route path="/login" exact component={LoginScreen} />
         <PrivateRoute path="/admin"
           component={AdminLayout}
           loading={layoutState.loading}
           isAuthenticated={layoutState.isAuthenticated} />
-        <Route path="/login" exact component={LoginScreen} />
       </Switch>
     </React.Suspense>
   </Router>

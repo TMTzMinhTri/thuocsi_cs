@@ -2,7 +2,6 @@ import {
   LayoutActionTypes,
   ILayoutReducer,
   GET_CURRENT_USER_SUCCESS,
-  GET_CURRENT_USER_ERROR,
   SIGN_IN_SUCCESS,
   SIGN_OUT,
 } from 'Interface/Store/layout.types';
@@ -11,7 +10,6 @@ const initialState: ILayoutReducer = {
   user: null,
   isAuthenticated: false,
   loading: true,
-  error: '',
 };
 
 export default function (state = initialState, action: LayoutActionTypes): ILayoutReducer {
@@ -24,16 +22,8 @@ export default function (state = initialState, action: LayoutActionTypes): ILayo
         isAuthenticated: true,
         loading: false,
       };
-
-    case GET_CURRENT_USER_ERROR:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticated: false,
-        user: null,
-        error: action.error,
-      };
     case SIGN_OUT:
+      localStorage.clear();
       return {
         ...state,
         loading: false,

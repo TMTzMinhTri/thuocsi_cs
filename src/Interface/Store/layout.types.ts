@@ -7,7 +7,6 @@ export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS';
-export const GET_CURRENT_USER_ERROR = 'GET_CURRENT_USER_ERROR';
 //
 
 //DEFINE ACTION
@@ -24,10 +23,7 @@ export interface IGetCurrentUserAction {
   type: 'GET_CURRENT_USER_SUCCESS';
   payload: IResponseUser;
 }
-export interface IGetCurrentUserErrorAction {
-  type: typeof GET_CURRENT_USER_ERROR;
-  error: string;
-}
+
 //
 
 // DEFINE REDUCER
@@ -35,13 +31,8 @@ export interface ILayoutReducer {
   user: IResponseUser | null;
   isAuthenticated: boolean;
   loading: boolean;
-  error: string;
 }
 
 //
 
-export type LayoutActionTypes =
-  | ISignInSuccessAction
-  | ISignOutAction
-  | IGetCurrentUserAction
-  | IGetCurrentUserErrorAction;
+export type LayoutActionTypes = ISignInSuccessAction | ISignOutAction | IGetCurrentUserAction;

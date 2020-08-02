@@ -29,7 +29,7 @@ const LoginScreen: React.FC<Iprops> = ({ isAuthenticated, signIn }) => {
     const submitLogin = (values: { login: string; password: string; }) => {
         signIn(values)
     }
-    
+
     const form_validation = (values: { login: string; password: string; }) => {
         const errors = {} as any;
         if (!values.login) {
@@ -67,7 +67,9 @@ const LoginScreen: React.FC<Iprops> = ({ isAuthenticated, signIn }) => {
                                         type="password"
                                         component={Componets.ReactstrapFormik.BaseInput}
                                         placeholder="Mật khẩu" />
-                                    <Button color="primary" block disabled={isSubmitting}>SIGN IN</Button>
+                                    <Button color="primary" block disabled={isSubmitting} type="submit">
+                                        SIGN IN
+                                    </Button>
                                 </Form>
                             )}
                         </Formik>

@@ -3,10 +3,12 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { RootAction } from 'Interface/Store/index.types';
 import { ILayoutReducer } from 'Interface/Store/layout.types';
 import { ITask_managerReducer } from 'Interface/Store/task_manager.types';
+import { INotificationReducer } from 'Interface/Store/notification.types';
 
 interface IRootReducers {
   layout: ILayoutReducer;
   task_manager: ITask_managerReducer;
+  notification: INotificationReducer;
 }
 
 const requireReducers = require.context('./reducers', false, /\.reducer\.ts$/);
