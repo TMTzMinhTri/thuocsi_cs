@@ -28,7 +28,18 @@ class Utils {
     let h = hash % 360;
     return 'hsl(' + h + ', ' + 80 + '%, ' + 80 + '%)';
   }
+  public FormatDateBy_YYYY_MM_DD(current_date: Date | undefined): string {
+    const date = new Date(current_date ? current_date : '');
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  }
 
+  public converTime(current_date: Date | undefined) {
+    const date = new Date(current_date ? current_date : '');
+    return `${date.getHours()}:${date.getMinutes()}`;
+  }
+  public formatCurrency(money: number): string {
+    return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' ₫';
+  }
   private queryParams() {
     return new URLSearchParams(useLocation().search);
   }

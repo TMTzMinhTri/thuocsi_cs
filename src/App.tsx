@@ -8,12 +8,15 @@ import { RootState } from 'Store';
 import { bindActionCreators, Dispatch } from 'redux';
 import { getCurrentUser } from 'Store/actions/layout.actions';
 import { RootAction } from 'Interface/Store/index.types';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 const AdminLayout = React.lazy(() => import('Layout/AdminLayout/index'))
 const LoginScreen = React.lazy(() => import('Screens/LoginScreen'))
 
 const mapState = (state: RootState) => ({
   layoutState: state.layout,
+  notification: state.notification
+
 })
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
   getUser: getCurrentUser
@@ -21,13 +24,13 @@ const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
 
 type IProps = ReturnType<typeof mapState> & ReturnType<typeof mapAction>
 
-const AppComponent: React.FC<IProps> = ({ layoutState, getUser }) => {
+const AppComponent: React.FC<IProps> = ({ layoutState, getUser, notification }) => {
   React.useEffect(() => {
     getUser()
   }, [getUser])
 
   return <Router>
-    <React.Suspense fallback={<Loading />}>
+    <React.Suspense fallback={<div style={{ width: "100vw", height: "100vh" }}><Loading /></div>}>
       <ToastContainer />
       <Switch>
         <Route path="/" exact render={() => <Redirect to="/admin" />} />
@@ -37,6 +40,7 @@ const AppComponent: React.FC<IProps> = ({ layoutState, getUser }) => {
           isAuthenticated={layoutState.isAuthenticated} />
         <Route path="/login" exact component={LoginScreen} />
       </Switch>
+      {notification.alert && <SweetAlert {...notification.alert}>{notification.alert.content}</SweetAlert>}
     </React.Suspense>
   </Router>
 }

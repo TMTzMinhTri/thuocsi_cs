@@ -24,17 +24,15 @@ export const TimeAgo: React.FC<ITimeAgoProps> = React.memo(({ datetime, live = t
             if (null !== ref) cancel(ref && ref)
         }
     })
-
     function renderTimeAgo() {
         const node = domref.current
         if (null !== node) {
             cancel(node)
             if (live) {
-                node?.setAttribute("datetime", toDateTime(datetime))
+                node.setAttribute("datetime", toDateTime(datetime))
                 render(node, locale, opts)
             }
         }
     }
-
-    return <time ref={domref} style={{ fontSize: "12px" }}>{format(datetime, locale, opts)}</time>
+    return <time ref={domref} style={{ fontSize: "12px" }}>{format(new Date(datetime).toDateString(), locale, opts)}</time>
 })

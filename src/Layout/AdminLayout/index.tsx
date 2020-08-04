@@ -5,7 +5,6 @@ import * as  Screens from "Screens";
 import { SideBar } from "./SideBar";
 import { NavBar } from "./NavBar";
 // import { Footer } from "./Footer";
-import SweetAlert from 'react-bootstrap-sweetalert';
 import { connect } from 'react-redux';
 import { RootState } from 'Store';
 import { Dispatch, bindActionCreators } from 'redux';
@@ -13,7 +12,6 @@ import { RootAction } from 'Interface/Store/index.types';
 
 
 const mapState = (state: RootState) => ({
-    notification: state.notification
 })
 
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
@@ -21,7 +19,7 @@ const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
 
 type IProps = ReturnType<typeof mapState> & ReturnType<typeof mapAction>
 
-const AdminLayout: React.SFC<IProps> = ({ notification }) => {
+const AdminLayout: React.SFC<IProps> = () => {
     let { path } = useRouteMatch();
     return <div className="container-scroller">
         <NavBar />
@@ -36,7 +34,6 @@ const AdminLayout: React.SFC<IProps> = ({ notification }) => {
                         </Route>
                         <Redirect to={`${path}/task-manager`} />
                     </Switch>
-                    {notification.alert && <SweetAlert {...notification.alert}>{notification.alert.content}</SweetAlert>}
                 </div>
                 {/* <Footer /> */}
             </div>

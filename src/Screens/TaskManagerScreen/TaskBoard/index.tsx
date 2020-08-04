@@ -19,11 +19,11 @@ export const TaskBoard: React.FC<IProps> = React.memo(({ cs_tasks, path, loading
 
    return <div className="d-flex">
       <div className="sticky_table">
-         <Table className="table" hover style={{ width: "100%", tableLayout: "fixed" }} >
+         <Table className="h-100 m-0" hover style={{ width: "100%", tableLayout: "fixed" }} >
             <HeaderBoard />
             <ListTask cs_tasks={cs_tasks} loading={loading} taskSelected={taskSelected} path={path} />
          </Table>
       </div>
-      <DetailTask path={path} cs_tasks={cs_tasks} loading={loading} />
+      {cs_tasks && <DetailTask path={path} cs_tasks={cs_tasks} loading={loading} />}
    </div>
 })

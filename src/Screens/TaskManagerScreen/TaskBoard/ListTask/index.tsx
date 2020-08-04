@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Spinner, Badge } from "reactstrap";
+import { Badge } from "reactstrap";
 import classNames from "classnames";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { StatusTask } from "Utils";
@@ -21,7 +21,7 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
     }
     return <tbody>
         {loading
-            ? renderTableRow(<Spinner />)
+            ? renderTableRow(<Components.Loading />)
             : cs_tasks.length > 0
                 ? cs_tasks.map((item, index) =>
                     <tr
@@ -55,7 +55,7 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
 }
 const renderTableRow = (component: React.ReactElement) => {
     return <tr>
-        <td>{component}</td>
+        <td colSpan={4}>{component}</td>
     </tr>
 }
 

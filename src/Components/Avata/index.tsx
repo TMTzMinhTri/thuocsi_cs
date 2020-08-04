@@ -6,10 +6,11 @@ import { words } from "lodash";
 
 interface IAvataProps {
     name: string,
-    target: string
+    target: string,
+    classNames?: string
 }
 
-export const Avata: React.FC<IAvataProps> = React.memo(({ name, target }) => {
+export const Avata: React.FC<IAvataProps> = React.memo(({ name, target, classNames }) => {
     function generateName(name: string) {
         let shortname: string = "";
         if (!name) {
@@ -24,7 +25,7 @@ export const Avata: React.FC<IAvataProps> = React.memo(({ name, target }) => {
         }
         return shortname
     }
-    return <div>
+    return <div className={classNames}>
         <div style={{ backgroundColor: Utils.stringToHslColor(name), height: "30px", width: "30px", lineHeight: "30px", fontSize: "12px" }}
             className="rounded-circle text-center" id={target}>
             {generateName(name)}
