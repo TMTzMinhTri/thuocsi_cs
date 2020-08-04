@@ -4,6 +4,8 @@ export const GET_LIST_TASK_SUCCESS = 'GET_LIST_TASK_SUCCESS';
 export const GET_LIST_TASK_By_FILTER_SUCCESS = 'GET_LIST_TASK_By_FILTER_SUCCESS';
 export const UPDATE_USER_INPUT = 'UPDATE_USER_INPUT';
 export const LOADING_TABLE = 'LOADING_TABLE';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const TASK_SELECTED = 'TASK_SELECTED';
 
 //DEFINE ACTION
 
@@ -23,6 +25,17 @@ export interface IUpdateUserInputAction {
 export interface ILoadingTableAction {
   type: typeof LOADING_TABLE;
 }
+
+export interface ICreateCommentAction {
+  type: typeof CREATE_COMMENT;
+  task_selected: Icstasks | null;
+  cs_tasks: Icstasks[];
+}
+
+export interface ISelectedTaskAction {
+  type: typeof TASK_SELECTED;
+  payload: Icstasks | null;
+}
 //
 
 // DEFINE REDUCER
@@ -32,6 +45,7 @@ export interface ITask_managerReducer {
   cs_tasks: Icstasks[];
   loading: boolean;
   userInput: IUserInput;
+  task_selected: Icstasks | null;
 }
 
 //
@@ -51,4 +65,6 @@ export type TaskManagerActionTypes =
   | IGetListTaskAction
   | IGetListTaskByFilterAction
   | IUpdateUserInputAction
-  | ILoadingTableAction;
+  | ILoadingTableAction
+  | ICreateCommentAction
+  | ISelectedTaskAction;

@@ -1,7 +1,7 @@
 export interface IResponeListTasks {
   total_count: number;
   user_detail: IUserDetail;
-  cs_tasks: Icstasks[];
+  cs_tasks: Array<Icstasks>;
 }
 
 export interface IResponeListReason {
@@ -52,6 +52,7 @@ export interface Icstasks {
   following_cs_name: string;
   following_cs_id: number;
   qc_by: string;
+  comments: Array<ITaskComment>;
 }
 
 export interface IUserDetail {
@@ -66,4 +67,10 @@ export interface IUserDetail {
   satisfaction_level: string;
   created_at: Date;
   activated_at: Date;
+}
+
+export interface ITaskComment {
+  id: number;
+  content: string;
+  created_at: Date;
 }

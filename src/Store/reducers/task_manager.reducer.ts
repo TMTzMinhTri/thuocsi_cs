@@ -3,6 +3,8 @@ import {
   GET_LIST_TASK_SUCCESS,
   UPDATE_USER_INPUT,
   LOADING_TABLE,
+  CREATE_COMMENT,
+  TASK_SELECTED,
 } from 'Interface/Store/task_manager.types';
 import { RootAction } from 'Interface/Store/index.types';
 
@@ -11,6 +13,7 @@ const initialState: ITask_managerReducer = {
   total_count: 0,
   user_detail: null,
   loading: true,
+  task_selected: null,
   userInput: {
     page: 1,
     per_page: 30,
@@ -20,7 +23,7 @@ const initialState: ITask_managerReducer = {
     user_id: null,
     so_id: null,
     status: null,
-  }
+  },
 };
 
 export default function (state = initialState, action: RootAction): ITask_managerReducer {
@@ -40,8 +43,18 @@ export default function (state = initialState, action: RootAction): ITask_manage
         ...state,
         userInput: action.payload,
       };
-
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        task_selected: action.task_selected,
+        cs_tasks: action.cs_tasks,
+      };
+    case TASK_SELECTED:
+      return {
+        ...state,
+        task_selected: action.payload,
+      };
     default:
-      return state;
+      return { ...state };
   }
 }

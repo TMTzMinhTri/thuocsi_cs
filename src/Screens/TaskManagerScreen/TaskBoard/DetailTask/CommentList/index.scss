@@ -1,0 +1,23 @@
+.comment_list {
+    list-style: none;
+    padding: 0;
+    &__item {
+        margin-bottom: 20px;
+        display: flex;
+        &__body{
+            padding: 0 10px;    
+            flex: 1;
+        }
+        &__title {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        &__name{
+            font-weight: 500;
+            margin-right:20px ;
+        }
+        &__content{
+            word-break: break-all;
+        }
+    }
+}

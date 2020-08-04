@@ -24,6 +24,6 @@ export const TaskBoard: React.FC<IProps> = React.memo(({ cs_tasks, path, loading
             <ListTask cs_tasks={cs_tasks} loading={loading} taskSelected={taskSelected} path={path} />
          </Table>
       </div>
-      {cs_tasks && <DetailTask path={path} cs_tasks={cs_tasks} loading={loading} />}
+      {!loading && <DetailTask path={path} />}
    </div>
 })
