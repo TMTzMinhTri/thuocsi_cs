@@ -9,6 +9,7 @@ import Logo from "stylesheets/svg/logo_thuocsi.svg";
 import { Redirect } from 'react-router-dom';
 import { Formik, Field, Form } from "formik";
 import * as Componets from "Components";
+import { toast } from 'react-toastify';
 
 interface IState {
     isAuthenticated: boolean
@@ -26,8 +27,10 @@ const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
 type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction>
 
 const LoginScreen: React.FC<Iprops> = ({ isAuthenticated, signIn }) => {
-    const submitLogin = (values: { login: string; password: string; }) => {
-        signIn(values)
+    
+    const submitLogin = async (values: { login: string; password: string; }) => {
+        const err = await signIn(values)
+        err && toast.error(err, { autoClose: 2000 })
     }
 
     const form_validation = (values: { login: string; password: string; }) => {
@@ -51,7 +54,7 @@ const LoginScreen: React.FC<Iprops> = ({ isAuthenticated, signIn }) => {
                             <img src={Logo} alt="Logo-thuoc-si" />
                         </div>
                         <Formik
-                            initialValues={{ login: "0111222333", password: "123123" }}
+                            initialValues={{ login: "01112223331", password: "123123" }}
                             onReset={() => { }}
                             onSubmit={values => submitLogin(values)}
                             validate={values => form_validation(values)}

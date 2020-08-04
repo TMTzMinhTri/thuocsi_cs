@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './App.scss'
+import 'react-toastify/dist/ReactToastify.css';
+
 import { App } from './App';
 
 import * as serviceWorker from './serviceWorker';

@@ -22,15 +22,20 @@ const signIn = (data: { login: string; password: string }) => (
   const {
     notification: { alert },
   } = getState();
-  sign_in(data).then((rsp) => {
-    if (rsp.code === 'OK') {
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ token: rsp.data.authentication_token, phone: rsp.data.phone_number })
-      );
-      alert && dispatch({ type: REMOVE_ALERT_ERROR });
-      dispatch({ type: SIGN_IN_SUCCESS, payload: rsp.data });
-    }
+  return new Promise((resolve) => {
+    sign_in(data).then((rsp) => {
+      if (rsp.code === 'OK') {
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ token: rsp.data.authentication_token, phone: rsp.data.phone_number })
+        );
+        alert && dispatch({ type: REMOVE_ALERT_ERROR });
+        dispatch({ type: SIGN_IN_SUCCESS, payload: rsp.data });
+        resolve();
+      } else {
+        resolve(rsp.message);
+      }
+    });
   });
 };
 

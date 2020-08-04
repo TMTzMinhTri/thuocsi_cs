@@ -48,8 +48,8 @@ export const Api = {
                             title: e.name,
                             type: "error",
                             onConfirm: () => {
-                                store.dispatch<RootAction>({ type: SIGN_OUT })
                                 store.dispatch<RootAction>({ type: REMOVE_ALERT_ERROR })
+                                store.dispatch<RootAction>({ type: SIGN_OUT })
                                 window.location.assign(path)
                             }
                         }

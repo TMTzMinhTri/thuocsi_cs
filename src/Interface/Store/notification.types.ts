@@ -1,4 +1,5 @@
 import { SweetAlertProps } from 'react-bootstrap-sweetalert/dist/types';
+
 export const SHOW_ALERT_ERROR = 'SHOW_ALERT_ERROR';
 export const REMOVE_ALERT_ERROR = 'REMOVE_ALERT_ERROR';
 
@@ -18,4 +19,6 @@ export interface INotificationReducer {
   alert: IAlertProps | null;
 }
 
-export type NotificationActionTypes = IShowAlertErrorAction | IRemoveAlertErrorAction;
+export type NotificationActionTypes =
+  | IShowAlertErrorAction
+  | IRemoveAlertErrorAction
