@@ -39,6 +39,8 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ path, task_ma
         })
     }, [history, name, path, selectDetailTask])
 
+
+
     return name && task_manager.task_selected !== null
         ? <div ref={refDetail} className="detail-task">
             <div className="detail-task__header">
@@ -71,8 +73,8 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ path, task_ma
                     <CardText>Khách hàng: {task_manager.task_selected.user_name}</CardText>
                     <CardText>SĐT: {task_manager.task_selected.user_phone}</CardText>
                 </div>
-                <div className="detail-task__activity">
-                    <CommentInput name={name} CreateComment={createCommentInTask} currentUser={currentUser} />
+                <div className="detail-task__activity" >
+                    <CommentInput name={name} CreateComment={createCommentInTask} currentUser={currentUser} comments={task_manager.task_selected.comments} />
                     <CommentList comments={task_manager.task_selected.comments} />
                 </div>
             </div>

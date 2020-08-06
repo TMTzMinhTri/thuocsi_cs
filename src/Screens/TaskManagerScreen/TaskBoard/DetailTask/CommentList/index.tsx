@@ -8,7 +8,8 @@ interface ICommentList {
 }
 
 export const CommentList: React.FC<ICommentList> = React.memo(({ comments }) => {
-    return <ul className="comment_list">
+
+    return <ul className="comment_list" >
         {comments.map((cm, index) => <li key={`task_comment__item_${index}`} className="comment_list__item">
             <div><Components.Avata name="Minh Tri" target={`comment_creater_${index}`} /></div>
             <div className="comment_list__item__body">
