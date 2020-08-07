@@ -1,0 +1,17 @@
+{
+    "admin": {
+        "task-manager": [
+            "create:task"
+        ],
+        "files": [
+            "create:file"
+        ]
+    },
+    "member": {},
+    "tech": {},
+    "finance": {
+        "task-manager": [
+            "create:task"
+        ]
+    }
+}

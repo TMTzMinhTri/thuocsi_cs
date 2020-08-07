@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Route, useRouteMatch, useParams, Redirect } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import * as  Screens from "Screens";
 
 import { SideBar } from "./SideBar";
@@ -9,9 +9,12 @@ import { connect } from 'react-redux';
 import { RootState } from 'Store';
 import { Dispatch, bindActionCreators } from 'redux';
 import { RootAction } from 'Interface/Store/index.types';
+import * as Components from "Components";
+import { Button } from 'reactstrap';
 
 
 const mapState = (state: RootState) => ({
+    role: state.layout.user?.roles
 })
 
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
@@ -19,7 +22,7 @@ const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
 
 type IProps = ReturnType<typeof mapState> & ReturnType<typeof mapAction>
 
-const AdminLayout: React.SFC<IProps> = () => {
+const AdminLayout: React.SFC<IProps> = ({ role }) => {
     let { path } = useRouteMatch();
     return <div className="container-scroller">
         <NavBar />
@@ -29,9 +32,7 @@ const AdminLayout: React.SFC<IProps> = () => {
                 <div className="content-wrapper">
                     <Switch>
                         <Route path={`${path}/task-manager`} component={Screens.TaskManagerScreen} />
-                        <Route path={`${path}/:topicId`}>
-                            <Topic />
-                        </Route>
+                        <Route path={`${path}/files`} component={Topic} />
                         <Redirect to={`${path}/task-manager`} />
                     </Switch>
                 </div>
@@ -41,9 +42,14 @@ const AdminLayout: React.SFC<IProps> = () => {
     </div>
 }
 
-const Topic = () => {
-    let { topicId } = useParams();
-    return <div>{topicId}</div>
+const Topic = ({ role }: any) => {
+    // let { topicId } = useParams();
+    return <div>
+        {/* {topicId} */}
+        <Components.Can role={role}>
+            <Button>CLick</Button>
+        </Components.Can>
+    </div>
 }
 
 export default connect(mapState, mapAction)(AdminLayout)

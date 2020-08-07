@@ -27,7 +27,7 @@ export const Avata: React.FC<IAvataProps> = React.memo(({ name, target, classNam
     }
     return <div className={classNames}>
         <div style={{ backgroundColor: Utils.stringToHslColor(name), height: "30px", width: "30px", lineHeight: "30px", fontSize: "12px" }}
-            className="rounded-circle text-center" id={target}>
+            className="rounded-circle text-center cursor-pointer" id={target}>
             {generateName(name)}
         </div>
         <UncontrolledTooltip placement="top" target={target}>

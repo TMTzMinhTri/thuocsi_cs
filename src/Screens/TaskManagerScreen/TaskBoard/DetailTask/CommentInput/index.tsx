@@ -5,8 +5,9 @@ import * as Components from "Components";
 import { isEmpty } from "lodash";
 import { IResponseUser } from "Interface/Response/session.types";
 import { ITaskComment } from "Interface/Response/task_manager.types";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
     name: string,
     CreateComment: Function,
     currentUser: IResponseUser | null,
@@ -14,7 +15,7 @@ interface IProps {
 }
 
 
-export const CommentInput: React.FC<IProps> = ({ name, CreateComment, currentUser, comments }) => {
+export const CommentInputComponent: React.FC<IProps> = ({ name, CreateComment, currentUser, comments, location }) => {
     const [isInput, setIsInput] = React.useState<boolean>(false)
     let formRef = React.useRef<FormikProps<{ comment: string }>>(null)
     let inputRef = React.useRef<HTMLElement>(null)
@@ -71,8 +72,12 @@ export const CommentInput: React.FC<IProps> = ({ name, CreateComment, currentUse
                         </Form>
                     )}
                 </Formik>
-                : <div onClick={(toggleInput)} className="detail-task__comment-placeholder">Add a comment...</div>}
+                : <Components.Can role={currentUser?.roles} action="create:task">
+                    <div onClick={(toggleInput)} className="detail-task__comment-placeholder">Add a comment...</div>
+                </Components.Can>}
         </div>
     </FormGroup>
     </div>
 }
+
+export const CommentInput = withRouter(CommentInputComponent)
