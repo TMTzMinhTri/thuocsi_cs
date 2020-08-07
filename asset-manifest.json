@@ -1,0 +1,38 @@
+{
+  "files": {
+    "static/js/0.14409be3.chunk.js": "/thuocsi_cs/static/js/0.14409be3.chunk.js",
+    "static/js/0.14409be3.chunk.js.map": "/thuocsi_cs/static/js/0.14409be3.chunk.js.map",
+    "main.css": "/thuocsi_cs/static/css/main.c4242f1a.chunk.css",
+    "main.js": "/thuocsi_cs/static/js/main.ba3a1175.chunk.js",
+    "main.js.map": "/thuocsi_cs/static/js/main.ba3a1175.chunk.js.map",
+    "runtime-main.js": "/thuocsi_cs/static/js/runtime-main.053a8db2.js",
+    "runtime-main.js.map": "/thuocsi_cs/static/js/runtime-main.053a8db2.js.map",
+    "static/css/3.1c5ef917.chunk.css": "/thuocsi_cs/static/css/3.1c5ef917.chunk.css",
+    "static/js/3.f0b8e36f.chunk.js": "/thuocsi_cs/static/js/3.f0b8e36f.chunk.js",
+    "static/js/3.f0b8e36f.chunk.js.map": "/thuocsi_cs/static/js/3.f0b8e36f.chunk.js.map",
+    "static/css/4.25ff2e5b.chunk.css": "/thuocsi_cs/static/css/4.25ff2e5b.chunk.css",
+    "static/js/4.74265b9f.chunk.js": "/thuocsi_cs/static/js/4.74265b9f.chunk.js",
+    "static/js/4.74265b9f.chunk.js.map": "/thuocsi_cs/static/js/4.74265b9f.chunk.js.map",
+    "static/js/5.cf9cede9.chunk.js": "/thuocsi_cs/static/js/5.cf9cede9.chunk.js",
+    "static/js/5.cf9cede9.chunk.js.map": "/thuocsi_cs/static/js/5.cf9cede9.chunk.js.map",
+    "static/js/6.b626f4a1.chunk.js": "/thuocsi_cs/static/js/6.b626f4a1.chunk.js",
+    "static/js/6.b626f4a1.chunk.js.map": "/thuocsi_cs/static/js/6.b626f4a1.chunk.js.map",
+    "index.html": "/thuocsi_cs/index.html",
+    "precache-manifest.81888fafc0233694f6791ee84838d5f8.js": "/thuocsi_cs/precache-manifest.81888fafc0233694f6791ee84838d5f8.js",
+    "service-worker.js": "/thuocsi_cs/service-worker.js",
+    "static/css/3.1c5ef917.chunk.css.map": "/thuocsi_cs/static/css/3.1c5ef917.chunk.css.map",
+    "static/css/4.25ff2e5b.chunk.css.map": "/thuocsi_cs/static/css/4.25ff2e5b.chunk.css.map",
+    "static/css/main.c4242f1a.chunk.css.map": "/thuocsi_cs/static/css/main.c4242f1a.chunk.css.map",
+    "static/js/0.14409be3.chunk.js.LICENSE.txt": "/thuocsi_cs/static/js/0.14409be3.chunk.js.LICENSE.txt",
+    "static/js/3.f0b8e36f.chunk.js.LICENSE.txt": "/thuocsi_cs/static/js/3.f0b8e36f.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/thuocsi_cs/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/logo_thuocsi.svg": "/thuocsi_cs/static/media/logo_thuocsi.96e06b43.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.053a8db2.js",
+    "static/css/3.1c5ef917.chunk.css",
+    "static/js/3.f0b8e36f.chunk.js",
+    "static/css/main.c4242f1a.chunk.css",
+    "static/js/main.ba3a1175.chunk.js"
+  ]
+}
