@@ -1,0 +1,19 @@
+.filter-control {
+    &__search-container {
+        i {
+            position: absolute;
+            padding: 0 10px;
+            line-height: 38px;
+            color: #8e8e8e;
+        }
+    }
+    &__input {
+        border-radius: 30px;
+        padding-left: 30px;
+        text-transform: uppercase;
+    }
+    &__date-range {
+        width: 150px;
+        text-align: center;
+    }
+}

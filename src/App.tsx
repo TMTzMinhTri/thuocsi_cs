@@ -11,6 +11,7 @@ import { RootAction } from 'Interface/Store/index.types';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 const AdminLayout = React.lazy(() => import('Layout/AdminLayout/index'))
+const TaskLayout = React.lazy(() => import("Layout/TaskLayout/index"))
 const LoginScreen = React.lazy(() => import('Screens/LoginScreen'))
 
 const mapState = (state: RootState) => ({
@@ -38,6 +39,7 @@ const AppComponent: React.FC<IProps> = ({ layoutState, getUser, notification }) 
           component={AdminLayout}
           loading={layoutState.loading}
           isAuthenticated={layoutState.isAuthenticated} />
+        <PrivateRoute path='/task' component={TaskLayout} loading={layoutState.loading} isAuthenticated={layoutState.isAuthenticated} />
         <Route path="/login" exact component={LoginScreen} />
       </Switch>
       {notification.alert && <SweetAlert {...notification.alert}>{notification.alert.content}</SweetAlert>}

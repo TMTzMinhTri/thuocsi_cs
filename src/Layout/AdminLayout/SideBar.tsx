@@ -3,12 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 const ListMenu = [
     {
-        name: "Quản lý task",
+        name: "Task manager",
         icon: "fa-tasks",
-        path: "/admin/task-manager"
+        path: "/admin/task-manager/all-case",
+        child: [
+            { name: "All case", icon: "fa-tasks", path: "/admin/task-manager/all-case" },
+            { name: "My case", icon: "fa-tasks", path: "/admin/task-manager/my-case" },
+        ]
     },
     {
-        name: "Danh sách file",
+        name: "List files",
         icon: "fa-file",
         path: "/admin/files"
     }
@@ -40,6 +44,33 @@ export const SideBar: React.SFC<{}> = () => {
         // console.log(document.querySelector('#sidebar')?.classList)
     }
 
+    const renderMenuItem = () => {
+        return ListMenu.map((menu, index) => {
+            const key = `side-menu-${menu.name}-${index}`
+            return menuItem(menu, key)
+        })
+    }
+
+    const menuItem = (menu: any, key: string) => {
+        return <li className="nav-item" key={key}>
+            {!menu.child
+                ? <NavLink to={menu.path} activeClassName="active" className="nav-link" >
+                    <i className={`fa ${menu.icon} menu-icon`} aria-hidden="true"></i>
+                    <span className="menu-title">{menu.name}</span>
+                </NavLink>
+                : <React.Fragment>
+                    <NavLink to={menu.path} activeClassName="active" className="nav-link" >
+                        <i className={`fa ${menu.icon} menu-icon`} aria-hidden="true"></i>
+                        <span className="menu-title">{menu.name}</span>
+                    </NavLink>
+                    <ul className="nav" style={{ marginLeft: "30px" }}>
+                        {menu.child.map((menuchild: any, index: number) => {
+                            return menuItem(menuchild, `side-menu-child${menuchild.name}-${index}`)
+                        })}
+                    </ul>
+                </React.Fragment>}
+        </li>
+    }
 
     return (
         <nav className="sidebar sidebar-offcanvas" id="sidebar">
@@ -53,11 +84,7 @@ export const SideBar: React.SFC<{}> = () => {
                 </a>
             </div>
             <ul className="nav">
-                {ListMenu.map((item, index) => <li className="nav-item" key={`side-menu-${item.name}-${index}`}>
-                    <NavLink to={item.path} activeClassName="active" className="nav-link" >
-                        <i className={`fa ${item.icon} menu-icon`} aria-hidden="true"></i>
-                        <span className="menu-title">{item.name}</span>
-                    </NavLink></li>)}
+                {renderMenuItem()}
             </ul>
         </nav>
     )

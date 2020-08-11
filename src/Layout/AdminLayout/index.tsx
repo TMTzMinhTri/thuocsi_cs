@@ -31,9 +31,10 @@ const AdminLayout: React.SFC<IProps> = ({ role }) => {
             <div className="main-panel">
                 <div className="content-wrapper">
                     <Switch>
-                        <Route path={`${path}/task-manager`} component={Screens.TaskManagerScreen} />
+                        <Route path={`${path}/task-manager/all-case`} component={Screens.TaskManagerScreen} />
+                        <Route path={`${path}/task-manager/my-case`} component={MyCase} />
                         <Route path={`${path}/files`} component={Topic} />
-                        <Redirect to={`${path}/task-manager`} />
+                        <Redirect to={`${path}/task-manager/all-case`} />
                     </Switch>
                 </div>
                 {/* <Footer /> */}
@@ -46,10 +47,15 @@ const Topic = ({ role }: any) => {
     // let { topicId } = useParams();
     return <div>
         {/* {topicId} */}
-        <Components.Can role={role}>
+        Files
+        <Components.Can role={"admin"}>
             <Button>CLick</Button>
         </Components.Can>
     </div>
+}
+
+const MyCase = () => {
+    return <div>My Case</div>
 }
 
 export default connect(mapState, mapAction)(AdminLayout)
