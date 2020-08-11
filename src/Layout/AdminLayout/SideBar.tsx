@@ -15,6 +15,11 @@ const ListMenu = [
         name: "List files",
         icon: "fa-file",
         path: "/admin/files"
+    },
+    {
+        name: "Design",
+        icon: "fa-universal-access",
+        path: "/task"
     }
 ]
 

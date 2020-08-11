@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { RootState } from "Store";
 import { Dispatch, bindActionCreators } from "redux";
 import { RootAction } from "Interface/Store/index.types";
+import Logo from 'stylesheets/svg/logo_thuocsi.svg';
+
 
 const mapState = (state: RootState) => ({
     user: state.layout.user
@@ -20,7 +22,7 @@ export const HeaderComponent: React.FC<IProps> = ({ user }) => {
         <div className="task-header__left">
         </div>
         <Button onClick={() => document.body.classList.toggle('mini_sidebar')} className='task-header__navbar-toggle'>
-            <i className="fa fa-bars" aria-hidden="true"></i>
+            <img src={Logo} alt="Logo" />
         </Button>
         <UncontrolledDropdown className="task-header__profile">
             <DropdownToggle caret>

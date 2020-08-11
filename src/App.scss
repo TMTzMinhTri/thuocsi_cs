@@ -71,13 +71,13 @@
 @import "stylesheets/styles/layout";
 
 @import "Screens/TaskManagerScreen/FilterControl/SelectReason/selectReason";
-@import "Screens/TaskManagerScreen/FilterControl/index.scss";
 @import "Screens/TaskManagerScreen/TaskBoard/DetailTask/index.scss";
 @import "Screens/TaskManagerScreen/TaskBoard/DetailTask/CommentList/index.scss";
 
 // TaskLayout
 
 @import "stylesheets/styles/base/variables";
+@import "Screens/TaskManagerScreen/FilterControl/index.scss";
 
 @import "Layout/TaskLayout/index.scss";
 

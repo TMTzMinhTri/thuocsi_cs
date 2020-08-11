@@ -4,7 +4,7 @@ import { RootState } from 'Store';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RootAction } from 'Interface/Store/index.types';
 import { getListTask, getListTaskByFilter } from 'Store/actions/task_manager.actions';
-import { Card, CardBody } from 'reactstrap';
+import { Card, CardBody, Row, Col, Button, Container } from 'reactstrap';
 import { useRouteMatch, RouteComponentProps } from 'react-router-dom';
 import { TaskBoard } from './TaskBoard';
 import { FilterControl } from './FilterControl';
@@ -26,10 +26,12 @@ type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & Route
 export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task_manager_state, getListTaskByFilter, history }) => {
   let { path } = useRouteMatch();
   let { name } = Utils.getQueryparams(["name"])
+  const refFilter = React.createRef<HTMLDivElement>()
 
   React.useEffect(() => {
     getListTask()
   }, [getListTask])
+
 
   const handlePagination = React.useCallback((value) => {
     const { userInput } = task_manager_state
@@ -40,27 +42,45 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
     if (name) history.replace(path)
     getListTaskByFilter(user_input)
   }, [getListTaskByFilter, task_manager_state, name, history, path])
-
-  return <div className="row">
-    <div className="col-lg-12 stretch-card">
-      <Card>
-        <CardBody>
-          <FilterControl />
-          <TaskBoard
-            cs_tasks={task_manager_state.cs_tasks}
-            path={path}
-            loading={task_manager_state.loading}
-            taskSelected={parseInt(name)} />
-          <Components.PaginationBar
-            current={task_manager_state.userInput.page}
-            perpage={30}
-            totalRecords={task_manager_state.total_count}
-            size={"sm"}
-            onChangePage={(value: number) => handlePagination(value)} />
-        </CardBody>
-      </Card>
-    </div>
+  
+  const showFilter = () => refFilter.current?.classList.toggle('show')
+  return <div className="d-flex">
+    <Container fluid>
+      <Row>
+        <Col md={12} className="d-flex">
+          <div style={{ flex: 1 }}>
+            {/* <Card> */}
+              <CardBody>
+                <Button color="primary" onClick={showFilter} outline>
+                  <span className="mr-2">Fillter</span>
+                  <i className="fa fa-filter" aria-hidden="true"></i>
+                </Button>
+              </CardBody>
+            {/* </Card> */}
+          </div>
+        </Col>
+        <div className="col-lg-12 stretch-card">
+          <Card>
+            <CardBody>
+              <TaskBoard
+                cs_tasks={task_manager_state.cs_tasks}
+                path={path}
+                loading={task_manager_state.loading}
+                taskSelected={parseInt(name)} />
+              <Components.PaginationBar
+                current={task_manager_state.userInput.page}
+                perpage={30}
+                totalRecords={task_manager_state.total_count}
+                size={"sm"}
+                onChangePage={(value: number) => handlePagination(value)} />
+            </CardBody>
+          </Card>
+        </div>
+      </Row>
+    </Container>
+    <FilterControl ref={refFilter} showFilter={showFilter} />
   </div>
+
 }
 
 

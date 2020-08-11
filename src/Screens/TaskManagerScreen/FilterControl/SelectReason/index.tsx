@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormGroup, Label, Col } from 'reactstrap';
+import { FormGroup, Label } from 'reactstrap';
 import Select, { components } from 'react-select'
 import { IResponeListReason } from 'Interface/Response/task_manager.types';
 interface ISelectReasonProps {
@@ -18,7 +18,7 @@ export const SelectReason: React.FC<ISelectReasonProps> = ({ listReason }) => {
         </components.ValueContainer>
     };
 
-    return <Col md={2}><FormGroup>
+    return <FormGroup>
         <Label >Lý do</Label>
         <Select
             options={listReason.map(item => ({ label: item.name, value: item.id }))}
@@ -29,5 +29,4 @@ export const SelectReason: React.FC<ISelectReasonProps> = ({ listReason }) => {
             hideSelectedOptions={false}
         />
     </FormGroup>
-    </Col>
 }
