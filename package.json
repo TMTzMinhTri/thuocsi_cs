@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@wojtekmaj/react-daterange-picker": "^3.0.0",
+    "animate.css": "^4.1.0",
     "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "font-awesome": "^4.7.0",

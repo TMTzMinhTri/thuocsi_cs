@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
+import 'animate.css'
 import './index.css';
 import './App.scss'
 import 'react-toastify/dist/ReactToastify.css';

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { CardTitle, CardText, Badge, Modal, ModalHeader, ModalBody, } from 'reactstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import _ from "lodash";
+
 import Utils from "Utils";
 import { Icstasks } from 'Interface/Response/task_manager.types';
-import { CardTitle, CardText, Badge, Modal, ModalHeader, ModalBody } from 'reactstrap';
-// import * as Components from "Components";
-import { connect } from 'react-redux';
 import { RootState } from 'Store';
-import { bindActionCreators, Dispatch } from 'redux';
 import { RootAction } from 'Interface/Store/index.types';
 import { createCommentInTask, selectDetailTask } from 'Store/actions/task_manager.actions';
 import { CommentList } from './CommentList';
@@ -29,21 +30,34 @@ type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & Route
 export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ path, task_manager, history, currentUser, createCommentInTask, selectDetailTask }) => {
     let { selected_task } = Utils.getQueryparams(["selected_task"])
     const refDetail = React.useRef<HTMLDivElement>(null)
+    const [modal, setModal] = React.useState(false);
 
     React.useEffect(() => {
         selected_task && selectDetailTask(parseInt(selected_task), (task: Icstasks) => {
             if (!task) {
                 history.replace(path)
+            } else {
+                refDetail.current !== null && refDetail.current.scrollTo({ top: 0, behavior: "smooth" })
+                setModal(true)
             }
-            refDetail.current !== null && refDetail.current.scrollTo({ top: 0, behavior: "smooth" })
         })
     }, [history, selected_task, path, selectDetailTask])
 
 
+    const goBack = () => {
+        setModal(!modal)
+        _.debounce(() => history.replace(path), 200)()
+    }
 
     return selected_task && task_manager.task_selected !== null
-        ? <Modal isOpen={selected_task} toggle={() => { }} className="">
-            <ModalHeader toggle={() => { }}>Modal title</ModalHeader>
+        ? <Modal isOpen={modal}
+            style={{ position: "absolute", right: 0, width: "800px", margin: 0, height: "100vh" }}
+            toggle={goBack}
+            size="lg"
+            contentClassName="h-100"
+            modalTransition={{ baseClass: `animate__animated animate__faster ${modal ? "animate__slideInRight " : "animate__slideOutRight"}`, timeout: 200 }}
+        >
+            <ModalHeader toggle={goBack}>Modal title</ModalHeader>
             <ModalBody>
                 <div ref={refDetail} className="detail-task">
                     <div className="detail-task__header">

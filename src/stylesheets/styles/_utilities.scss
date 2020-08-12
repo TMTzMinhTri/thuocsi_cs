@@ -150,12 +150,12 @@ small {
   font-weight: 500;
 }
 
-@media (min-width: 992px) {
-  .modal-lg,
-  .modal-xl {
-    max-width: 100%;
-  }
-}
+// @media (min-width: 992px) {
+//   .modal-lg,
+//   .modal-xl {
+//     max-width: 100%;
+//   }
+// }
 .status-indicator {
   border-width: 2px;
   border-style: solid;

@@ -27,11 +27,9 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
   let { path } = useRouteMatch();
   let { selected_task } = Utils.getQueryparams(["selected_task"])
   const refFilter = React.useRef<HTMLDivElement>()
-
   React.useEffect(() => {
     getListTask()
   }, [getListTask])
-
 
   const handlePagination = React.useCallback((value) => {
     const { userInput } = task_manager_state
