@@ -1,6 +1,6 @@
 {
     "admin": {
-        "task-manager": [
+        "all-case": [
             "create:task"
         ],
         "files": [

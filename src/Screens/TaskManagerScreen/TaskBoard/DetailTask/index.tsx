@@ -27,21 +27,21 @@ const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
 type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & RouteComponentProps & IPropsComponent & Dispatch
 
 export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ path, task_manager, history, currentUser, createCommentInTask, selectDetailTask }) => {
-    let { name } = Utils.getQueryparams(["name"])
+    let { selected_task } = Utils.getQueryparams(["selected_task"])
     const refDetail = React.useRef<HTMLDivElement>(null)
 
     React.useEffect(() => {
-        name && selectDetailTask(parseInt(name), (task: Icstasks) => {
+        selected_task && selectDetailTask(parseInt(selected_task), (task: Icstasks) => {
             if (!task) {
                 history.replace(path)
             }
             refDetail.current !== null && refDetail.current.scrollTo({ top: 0, behavior: "smooth" })
         })
-    }, [history, name, path, selectDetailTask])
+    }, [history, selected_task, path, selectDetailTask])
 
 
 
-    return name && task_manager.task_selected !== null
+    return selected_task && task_manager.task_selected !== null
         ? <div ref={refDetail} className="detail-task">
             <div className="detail-task__header">
                 <div>{Utils.FormatDateBy_YYYY_MM_DD(task_manager.task_selected?.created_at)} - {Utils.converTime(task_manager.task_selected?.created_at)}</div>
@@ -74,7 +74,7 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ path, task_ma
                     <CardText>SĐT: {task_manager.task_selected.user_phone}</CardText>
                 </div>
                 <div className="detail-task__activity" >
-                    <CommentInput name={name} CreateComment={createCommentInTask} currentUser={currentUser} comments={task_manager.task_selected.comments} />
+                    <CommentInput name={selected_task} CreateComment={createCommentInTask} currentUser={currentUser} comments={task_manager.task_selected.comments} />
                     <CommentList comments={task_manager.task_selected.comments} />
                 </div>
             </div>

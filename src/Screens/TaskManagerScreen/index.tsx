@@ -25,7 +25,7 @@ type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & Route
 
 export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task_manager_state, getListTaskByFilter, history }) => {
   let { path } = useRouteMatch();
-  let { name } = Utils.getQueryparams(["name"])
+  let { selected_task } = Utils.getQueryparams(["selected_task"])
   const refFilter = React.createRef<HTMLDivElement>()
 
   React.useEffect(() => {
@@ -39,24 +39,22 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
       ...userInput,
       page: value
     }
-    if (name) history.replace(path)
+    if (selected_task) history.replace(path)
     getListTaskByFilter(user_input)
-  }, [getListTaskByFilter, task_manager_state, name, history, path])
-  
+  }, [getListTaskByFilter, task_manager_state, selected_task, history, path])
+
   const showFilter = () => refFilter.current?.classList.toggle('show')
   return <div className="d-flex">
     <Container fluid>
       <Row>
         <Col md={12} className="d-flex">
           <div style={{ flex: 1 }}>
-            {/* <Card> */}
-              <CardBody>
-                <Button color="primary" onClick={showFilter} outline>
-                  <span className="mr-2">Fillter</span>
-                  <i className="fa fa-filter" aria-hidden="true"></i>
-                </Button>
-              </CardBody>
-            {/* </Card> */}
+            <CardBody>
+              <Button color="primary" onClick={showFilter} outline>
+                <span className="mr-2">Fillter</span>
+                <i className="fa fa-filter" aria-hidden="true"></i>
+              </Button>
+            </CardBody>
           </div>
         </Col>
         <div className="col-lg-12 stretch-card">
@@ -66,7 +64,7 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
                 cs_tasks={task_manager_state.cs_tasks}
                 path={path}
                 loading={task_manager_state.loading}
-                taskSelected={parseInt(name)} />
+                taskSelected={parseInt(selected_task)} />
               <Components.PaginationBar
                 current={task_manager_state.userInput.page}
                 perpage={30}

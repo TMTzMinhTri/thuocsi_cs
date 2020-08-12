@@ -17,7 +17,7 @@ interface IListTaskProps extends RouteComponentProps {
 
 export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks, history, path, taskSelected }) => {
     const handleClick = (id: number) => {
-        return history.replace(`${path}?name=${id}`)
+        return history.replace(`${path}?selected_task=${id}`)
     }
     return <tbody>
         {loading
@@ -29,7 +29,7 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
                         onClick={() => handleClick(item.id)}
                         className={classNames("cursor-pointer", { "active": taskSelected === item.id })}>
                         <td>
-                            <Link to={`${path}?name=${item.id}`}>{item.id}</Link>
+                            <Link to={`${path}?selected_task=${item.id}`}>{item.id}</Link>
                         </td>
                         <td>{item.so_id}</td>
                         <td><div style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>{item.cs_note}</div></td>
