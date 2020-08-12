@@ -9,7 +9,19 @@ const getListTask = () => (dispatch: Dispatch<RootAction>, getState: () => RootS
   const {
     task_manager: { userInput },
   } = getState();
-  get_list_cs_task(userInput).then((rsp) => {
+  const { assigned_member_id, from, per_page, to, created_by_id, failure_type_ids, page, so_id, status, user_id } = userInput;
+  get_list_cs_task({
+    page: page,
+    per_page: per_page,
+    from: from,
+    to: to,
+    failure_type_ids: failure_type_ids.map((it) => it.value),
+    user_id: user_id,
+    assigned_member_id: assigned_member_id ? assigned_member_id.value : null,
+    created_by_id: created_by_id ? created_by_id.value : null,
+    so_id: so_id,
+    status: status ? status.value : null,
+  }).then((rsp) => {
     if (rsp.code === 'OK') {
       const test = rsp.data.cs_tasks.map((it) => ({ ...it, comments: [{ id: _.random(1, 10), content: 'comment', created_at: new Date() }] }));
       dispatch({ type: GET_LIST_TASK_SUCCESS, payload: { ...rsp.data, cs_tasks: test } });
@@ -20,7 +32,20 @@ const getListTask = () => (dispatch: Dispatch<RootAction>, getState: () => RootS
 const getListTaskByFilter = (user_input: IUserInput) => (dispatch: Dispatch<RootAction>) => {
   dispatch({ type: UPDATE_USER_INPUT, payload: user_input });
   dispatch({ type: LOADING_TABLE });
-  get_list_cs_task(user_input).then((rsp) => {
+  const { assigned_member_id, from, per_page, to, created_by_id, failure_type_ids, page, so_id, status, user_id } = user_input;
+
+  get_list_cs_task({
+    page,
+    per_page,
+    from,
+    to,
+    failure_type_ids: failure_type_ids.map((it) => it.value),
+    user_id,
+    assigned_member_id: assigned_member_id ? assigned_member_id.value : null,
+    created_by_id: created_by_id ? created_by_id.value : null,
+    so_id,
+    status: status ? status.value : null,
+  }).then((rsp) => {
     if (rsp.code === 'OK') {
       const test = rsp.data.cs_tasks.map((it) => ({ ...it, comments: [{ id: _.random(1, 10), content: 'comment', created_at: new Date() }] }));
       dispatch({ type: GET_LIST_TASK_SUCCESS, payload: { ...rsp.data, cs_tasks: test } });

@@ -26,7 +26,7 @@ type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & Route
 export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task_manager_state, getListTaskByFilter, history }) => {
   let { path } = useRouteMatch();
   let { selected_task } = Utils.getQueryparams(["selected_task"])
-  const refFilter = React.createRef<HTMLDivElement>()
+  const refFilter = React.useRef<HTMLDivElement>()
 
   React.useEffect(() => {
     getListTask()
@@ -37,7 +37,8 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
     const { userInput } = task_manager_state
     const user_input: IUserInput = {
       ...userInput,
-      page: value
+      page: value,
+      // status: userInput.status.value
     }
     if (selected_task) history.replace(path)
     getListTaskByFilter(user_input)

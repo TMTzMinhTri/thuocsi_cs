@@ -1,32 +1,25 @@
 import * as React from 'react';
 import { FormGroup, Label } from 'reactstrap';
-import Select, { components } from 'react-select'
+import MultiSelect from "react-multi-select-component";
 import { IResponeListReason } from 'Interface/Response/task_manager.types';
+
 interface ISelectReasonProps {
-    listReason: IResponeListReason[]
+    listReason: IResponeListReason[],
+    reasons: Array<{ label: string; value: number }> | [],
+    handleOnSelect: (value: { type: string, value: any }) => void
 }
 
-export const SelectReason: React.FC<ISelectReasonProps> = ({ listReason }) => {
-
-    const ValueContainer = ({ children, ...props }: any) => {
-        const selected = props.getValue();
-        const selectedC = React.Children.toArray(children).filter((it: any) => ["Input"].indexOf(it.type.name) >= 0)
-        const content = `${selected.length} items`
-        return <components.ValueContainer {...props}>
-            {content}
-            {selectedC}
-        </components.ValueContainer>
-    };
+export const SelectReason: React.FC<ISelectReasonProps> = ({ listReason, reasons, handleOnSelect }) => {
 
     return <FormGroup>
         <Label >Lý do</Label>
-        <Select
+        <MultiSelect
             options={listReason.map(item => ({ label: item.name, value: item.id }))}
-            isMulti
-            components={{ ValueContainer }}
-            closeMenuOnSelect={false}
-            openMenuOnClick={true}
-            hideSelectedOptions={false}
+            value={reasons}
+            onChange={(value) => handleOnSelect({ type: "failure_type_ids", value })}
+            valueRenderer={(selected) => `${selected.length} items`}
+            labelledBy={"Select"}
+            hasSelectAll={false}
         />
     </FormGroup>
 }

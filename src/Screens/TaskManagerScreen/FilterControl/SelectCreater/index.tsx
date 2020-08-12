@@ -13,6 +13,7 @@ export const SelectCreater: React.FC<ISelectCreaterProps> = ({ listMember, creat
     return <FormGroup>
         <Label >Creater</Label>
         <Select
+            isClearable
             value={created_by}
             onChange={(value) => handleOnSelect({ type: "created_by_id", value })}
             options={listMember.map(item => ({ label: item.name, value: item.id }))}

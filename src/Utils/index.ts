@@ -28,9 +28,9 @@ class Utils {
     let h = hash % 360;
     return 'hsl(' + h + ', ' + 80 + '%, ' + 80 + '%)';
   }
-  public FormatDateBy_YYYY_MM_DD(current_date: Date | undefined): string {
+  public FormatDateBy_YYYY_MM_DD(current_date: Date | string): string {
     const date = new Date(current_date ? current_date : '');
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   }
 
   public converTime(current_date: Date | undefined) {

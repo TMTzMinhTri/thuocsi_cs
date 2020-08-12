@@ -52,19 +52,27 @@ export interface ITask_managerReducer {
 export interface IUserInput {
   page: number;
   per_page: number;
-  from: string;
-  to: string;
-  failure_type_ids: string[];
+  from: Date;
+  to: Date;
+  failure_type_ids: { label: string; value: number }[];
+  user_id: number | null;
+  so_id: number | null;
+  status: { label: string; value: string } | null;
+  created_by_id: { label: string; value: number } | null;
+  assigned_member_id: { label: string; value: number } | null;
+}
+
+export interface IFilterListTaskParams {
+  page: number;
+  per_page: number;
+  from: Date;
+  to: Date;
+  failure_type_ids: number[];
   user_id: number | null;
   so_id: number | null;
   status: string | null;
+  created_by_id: number | null;
+  assigned_member_id: number;
 }
-
 //
-export type TaskManagerActionTypes =
-  | IGetListTaskAction
-  | IGetListTaskByFilterAction
-  | IUpdateUserInputAction
-  | ILoadingTableAction
-  | ICreateCommentAction
-  | ISelectedTaskAction;
+export type TaskManagerActionTypes = IGetListTaskAction | IGetListTaskByFilterAction | IUpdateUserInputAction | ILoadingTableAction | ICreateCommentAction | ISelectedTaskAction;

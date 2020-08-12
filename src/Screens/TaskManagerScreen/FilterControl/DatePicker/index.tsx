@@ -4,16 +4,21 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import { Label, FormGroup } from 'reactstrap';
 
 
+interface IDatePickerProps {
+    date: Array<Date>,
+    handleSelectDate: (value: Array<Date>) => void
+}
 
-export const DatePicker = () => {
-    const [value, onChange] = React.useState([new Date(), new Date()]);
-
+export const DatePicker: React.FC<IDatePickerProps> = ({ date, handleSelectDate }) => {
     return <FormGroup>
         <Label >Date</Label>
         <DateRangePicker
             className="w-100"
-            onChange={onChange}
-            value={value}
+            onChange={(value) => handleSelectDate(value)}
+            value={date}
+            format="dd-MM-y"
+            rangeDivider='>'
+            clearIcon={null}
         />
     </FormGroup>
 }
