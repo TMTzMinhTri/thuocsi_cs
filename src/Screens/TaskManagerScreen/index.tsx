@@ -60,7 +60,6 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
         </Col>
         <div className="col-lg-12 stretch-card">
           <Card>
-            <CardBody>
               <TaskBoard
                 cs_tasks={task_manager_state.cs_tasks}
                 path={path}
@@ -72,7 +71,6 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
                 totalRecords={task_manager_state.total_count}
                 size={"sm"}
                 onChangePage={(value: number) => handlePagination(value)} />
-            </CardBody>
           </Card>
         </div>
       </Row>

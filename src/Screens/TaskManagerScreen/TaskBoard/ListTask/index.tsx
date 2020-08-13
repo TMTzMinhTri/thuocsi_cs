@@ -21,7 +21,7 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
     }
     return <tbody>
         {loading
-            ? renderTableRow(<Components.Loading />)
+            ? renderTableRow(<Components.Loading/>)
             : cs_tasks.length > 0
                 ? cs_tasks.map((item, index) =>
                     <tr
@@ -31,6 +31,9 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
                         <td>
                             <Link to={`${path}?selected_task=${item.id}`}>{item.id}</Link>
                         </td>
+                        <td>{item.so_id}</td>
+                        <td>{item.so_id}</td>
+                        <td>{item.so_id}</td>
                         <td>{item.so_id}</td>
                         <td><div style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>{item.cs_note}</div></td>
                         <td >
@@ -55,7 +58,7 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
 }
 const renderTableRow = (component: React.ReactElement) => {
     return <tr>
-        <td colSpan={4}>{component}</td>
+        <td colSpan={7}>{component}</td>
     </tr>
 }
 
