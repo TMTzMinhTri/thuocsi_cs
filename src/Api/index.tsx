@@ -15,12 +15,12 @@ interface IResponseResult {
 export const Api = {
     pathApi: process.env.REACT_APP_BASEURL || "https://api.stg.thuocsi.vn",
 
-    httpRequest<T>(method: string, url: string, body?: Object): Promise<IResponse<T>> {
+    httpRequest<T>(method: string, url: string, showWait: boolean, body?: Object): Promise<IResponse<T>> {
         const path = `${this.pathApi}${url}`
         const userStorage = localStorage.getItem('user')
         const user = userStorage ? JSON.parse(userStorage) : null
         return new Promise((resolve) => {
-            if (!NProgress.isStarted()) NProgress.start();
+            if (showWait && !NProgress.isStarted()) NProgress.start();
             fetch(path, {
                 method,
                 body: body ? JSON.stringify(body) : null,
@@ -60,13 +60,13 @@ export const Api = {
                 })
         })
     },
-    get<T>(url: string): Promise<IResponse<T>> {
-        return this.httpRequest("GET", url)
+    get<T>(url: string, showWait: boolean): Promise<IResponse<T>> {
+        return this.httpRequest("GET", url, showWait)
     },
-    post<T>(url: string, body: Object): Promise<IResponse<T>> {
-        return this.httpRequest("POST", url, body)
+    post<T>(url: string, body: Object, showWait: boolean): Promise<IResponse<T>> {
+        return this.httpRequest("POST", url, showWait, body)
     },
-    delete<T>(url: string): Promise<IResponse<T>> {
-        return this.httpRequest("DELETE", url)
+    delete<T>(url: string, showWait: boolean): Promise<IResponse<T>> {
+        return this.httpRequest("DELETE", url, showWait)
     }
 }

@@ -6,9 +6,6 @@ import { SearchOrder } from "./SearchOrder";
 import { SelectAssignedMember } from "./SelectAssignedMember";
 import { SelectReason } from "./SelectReason";
 import { SelectStatus } from "./SelectStatus";
-import { getListReason, getListMember } from 'Api/TaskManager';
-import { IResponeListReason } from 'Interface/Response/task_manager.types';
-import { IResponseUser } from 'Interface/Response/session.types';
 import { IUserInput } from 'Interface/Store/task_manager.types';
 import { connect } from 'react-redux';
 import { RootState } from 'Store';
@@ -21,7 +18,9 @@ interface IFilterControlComponentProps {
     showFilter: () => void
 }
 const mapState = (state: RootState) => ({
-    userInputState: state.task_manager.userInput
+    userInputState: state.task_manager.userInput,
+    listMember: state.task_manager.list_member,
+    listReason: state.task_manager.list_reason
 })
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
     getListTaskByFilter
@@ -30,16 +29,8 @@ type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & IFilt
 
 
 const FilterControlComponent = React.forwardRef<HTMLDivElement, Iprops>((props, ref) => {
-    const [listReason, setListReason] = React.useState<IResponeListReason[]>([])
-    const [listMember, setListMember] = React.useState<IResponseUser[]>([])
     const [userInput, setUserInput] = React.useState<IUserInput>(props.userInputState)
-
-    React.useEffect(() => {
-        Promise.all([getListReason(), getListMember()]).then(rsp => {
-            setListReason(rsp[0].data)
-            setListMember(rsp[1].data)
-        })
-    }, [])
+    
     const handleOnSelect = (value: { type: string, value: any }) => {
         setUserInput({ ...userInput, [value.type]: value.value })
     }
@@ -61,9 +52,9 @@ const FilterControlComponent = React.forwardRef<HTMLDivElement, Iprops>((props, 
                 <SearchOrder />
                 <DatePicker date={[userInput.from, userInput.to]} handleSelectDate={handleSelectDate} />
                 <SelectStatus handleOnSelect={handleOnSelect} status={userInput.status} />
-                <SelectReason listReason={listReason} reasons={userInput.failure_type_ids} handleOnSelect={handleOnSelect} />
-                <SelectAssignedMember listMember={listMember} assigned_member={userInput.assigned_member_id} handleOnSelect={handleOnSelect} />
-                <SelectCreater listMember={listMember} created_by={userInput.created_by_id} handleOnSelect={handleOnSelect} />
+                <SelectReason listReason={props.listReason} reasons={userInput.failure_type_ids} handleOnSelect={handleOnSelect} />
+                <SelectAssignedMember listMember={props.listMember} assigned_member={userInput.assigned_member_id} handleOnSelect={handleOnSelect} />
+                <SelectCreater listMember={props.listMember} created_by={userInput.created_by_id} handleOnSelect={handleOnSelect} />
             </CardBody>
             <CardFooter className="text-muted"><Button color="primary" block onClick={Filter}>Fillter</Button></CardFooter>
         </Card>

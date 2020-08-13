@@ -1,4 +1,4 @@
-import { ITask_managerReducer, GET_LIST_TASK_SUCCESS, UPDATE_USER_INPUT, LOADING_TABLE, CREATE_COMMENT, TASK_SELECTED } from 'Interface/Store/task_manager.types';
+import { ITask_managerReducer, GET_LIST_TASK_SUCCESS, UPDATE_USER_INPUT, LOADING_TABLE, CREATE_COMMENT, TASK_SELECTED, GET_LIST_REASON, GET_LIST_MEMBER } from 'Interface/Store/task_manager.types';
 import { RootAction } from 'Interface/Store/index.types';
 
 // to: new Date(),
@@ -22,6 +22,8 @@ const initialState: ITask_managerReducer = {
     created_by_id: null,
     assigned_member_id: null,
   },
+  list_member: [],
+  list_reason: [],
 };
 
 export default function (state = initialState, action: RootAction): ITask_managerReducer {
@@ -51,6 +53,16 @@ export default function (state = initialState, action: RootAction): ITask_manage
       return {
         ...state,
         task_selected: action.payload,
+      };
+    case GET_LIST_REASON:
+      return {
+        ...state,
+        list_reason: action.payload,
+      };
+    case GET_LIST_MEMBER:
+      return {
+        ...state,
+        list_member: action.payload,
       };
     default:
       return { ...state };

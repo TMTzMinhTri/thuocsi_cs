@@ -1,7 +1,7 @@
 import { RootAction } from 'Interface/Store/index.types';
 import { Dispatch } from 'redux';
-import { get_list_cs_task } from 'Api/TaskManager';
-import { GET_LIST_TASK_SUCCESS, UPDATE_USER_INPUT, IUserInput, LOADING_TABLE, CREATE_COMMENT, TASK_SELECTED } from 'Interface/Store/task_manager.types';
+import { get_list_cs_task, getListMember, getListReason } from 'Api/TaskManager';
+import { GET_LIST_TASK_SUCCESS, UPDATE_USER_INPUT, IUserInput, LOADING_TABLE, CREATE_COMMENT, TASK_SELECTED, GET_LIST_MEMBER, GET_LIST_REASON } from 'Interface/Store/task_manager.types';
 import { RootState } from 'Store';
 import _ from 'lodash';
 
@@ -53,6 +53,13 @@ const getListTaskByFilter = (user_input: IUserInput) => (dispatch: Dispatch<Root
   });
 };
 
+const getListMemberAndReason = () => (dispatch: Dispatch<RootAction>) => {
+  Promise.all([getListMember(), getListReason()]).then((rsp) => {
+    dispatch({ type: GET_LIST_MEMBER, payload: rsp[0].data });
+    dispatch({ type: GET_LIST_REASON, payload: rsp[1].data });
+  });
+};
+
 const createCommentInTask = (comment: string, callback: Function) => (dispatch: Dispatch<RootAction>, getState: () => RootState) => {
   const {
     task_manager: { task_selected, cs_tasks },
@@ -74,4 +81,4 @@ const selectDetailTask = (task_id: number | null, callback?: Function) => (dispa
   callback && callback(task);
 };
 
-export { getListTask, getListTaskByFilter, createCommentInTask, selectDetailTask };
+export { getListTask, getListTaskByFilter, createCommentInTask, selectDetailTask, getListMemberAndReason };

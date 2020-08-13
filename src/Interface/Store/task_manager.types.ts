@@ -1,4 +1,5 @@
-import { IResponeListTasks, IUserDetail, Icstasks } from 'Interface/Response/task_manager.types';
+import { IResponeListTasks, IUserDetail, Icstasks, IResponeListReason } from 'Interface/Response/task_manager.types';
+import { IResponseUser } from 'Interface/Response/session.types';
 
 export const GET_LIST_TASK_SUCCESS = 'GET_LIST_TASK_SUCCESS';
 export const GET_LIST_TASK_By_FILTER_SUCCESS = 'GET_LIST_TASK_By_FILTER_SUCCESS';
@@ -6,6 +7,8 @@ export const UPDATE_USER_INPUT = 'UPDATE_USER_INPUT';
 export const LOADING_TABLE = 'LOADING_TABLE';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const TASK_SELECTED = 'TASK_SELECTED';
+export const GET_LIST_MEMBER = 'GET_LIST_MEMBER';
+export const GET_LIST_REASON = 'GET_LIST_REASON';
 
 //DEFINE ACTION
 
@@ -36,6 +39,17 @@ export interface ISelectedTaskAction {
   type: typeof TASK_SELECTED;
   payload: Icstasks | null;
 }
+
+export interface IGetListMember {
+  type: typeof GET_LIST_MEMBER;
+  payload: IResponseUser[];
+}
+
+export interface IGetListReason {
+  type: typeof GET_LIST_REASON;
+  payload: IResponeListReason[];
+}
+
 //
 
 // DEFINE REDUCER
@@ -46,6 +60,8 @@ export interface ITask_managerReducer {
   loading: boolean;
   userInput: IUserInput;
   task_selected: Icstasks | null;
+  list_member: IResponseUser[];
+  list_reason: IResponeListReason[];
 }
 
 //
@@ -75,4 +91,12 @@ export interface IFilterListTaskParams {
   assigned_member_id: number;
 }
 //
-export type TaskManagerActionTypes = IGetListTaskAction | IGetListTaskByFilterAction | IUpdateUserInputAction | ILoadingTableAction | ICreateCommentAction | ISelectedTaskAction;
+export type TaskManagerActionTypes =
+  | IGetListTaskAction
+  | IGetListTaskByFilterAction
+  | IUpdateUserInputAction
+  | ILoadingTableAction
+  | ICreateCommentAction
+  | ISelectedTaskAction
+  | IGetListMember
+  | IGetListReason;

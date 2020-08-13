@@ -20,9 +20,9 @@ export const Avata: React.FC<IAvataProps> = React.memo(({ name, target, classNam
         if (arrayNames.length > 2) {
             shortname = arrayNames[arrayNames.length - 2].charAt(0) + arrayNames[arrayNames.length - 1].charAt(0)
         }
-        else {
+        else if (arrayNames.length === 2) {
             shortname = arrayNames[0].charAt(0) + arrayNames[1].charAt(0)
-        }
+        } else shortname = arrayNames[0].charAt(0)
         return shortname
     }
     return <div className={classNames}>

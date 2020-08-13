@@ -40,6 +40,10 @@ class Utils {
   public formatCurrency(money: number): string {
     return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' ₫';
   }
+  public FormatDateBy_DD_MM_YYYY(current_date: Date | string): string {
+    const date = new Date(current_date ? current_date : '');
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  }
   private queryParams() {
     return new URLSearchParams(useLocation().search);
   }

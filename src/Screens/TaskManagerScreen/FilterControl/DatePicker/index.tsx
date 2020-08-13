@@ -12,13 +12,17 @@ interface IDatePickerProps {
 export const DatePicker: React.FC<IDatePickerProps> = ({ date, handleSelectDate }) => {
     return <FormGroup>
         <Label >Date</Label>
-        <DateRangePicker
-            className="w-100"
-            onChange={(value) => handleSelectDate(value)}
-            value={date}
-            format="dd-MM-y"
-            rangeDivider='>'
-            clearIcon={null}
-        />
+        <div>
+            <DateRangePicker
+                maxDate={new Date()}
+                className="w-100"
+                onChange={(value) => handleSelectDate(value)}
+                value={date}
+                format="dd-MM-y"
+                calendarIcon={<i className="fa fa-calendar" aria-hidden="true"></i>}
+                rangeDivider='>'
+                clearIcon={null}
+            />
+        </div>
     </FormGroup>
 }

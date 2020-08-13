@@ -6,11 +6,13 @@ export const listTaskStatus = [
   { key: 'canceled', name: 'Đã hủy' },
 ];
 
-export const listAssignGroup = [
-  { key: 'not_set_group', name: 'Chưa chỉ định' },
-  { key: 'member_group', name: 'CS' },
-  { key: 'admin_group', name: 'Admin' },
-  { key: 'finance_group', name: 'Kế toán' },
-  { key: 'inventory_group', name: 'Kho' },
-  { key: 'tech_group', name: 'IT' },
-];
+
+
+export const listAssignGroup = {
+  not_set_group: 'Chưa chỉ định',
+  member_group: 'CS',
+  admin_group: 'Admin',
+  finance_group: 'kế toán',
+  inventory_group: 'kho',
+  tech_group: 'IT',
+};

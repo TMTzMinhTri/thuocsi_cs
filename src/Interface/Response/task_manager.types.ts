@@ -46,7 +46,7 @@ export interface Icstasks {
   feedback_user_phone: string;
   feedback_user_note: string;
   feedback_image_urls: string[];
-  bank_information: IBankInfomation | {};
+  bank_information: IBankInfomation;
   user_name: string;
   assigned_member_id: number;
   following_cs_name: string;

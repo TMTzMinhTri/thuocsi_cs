@@ -1,7 +1,7 @@
 .filter-control {
     height: calc(100vh - #{$header_height});
-    width: 400px;
-    margin-right: -400px;
+    width: 453px;
+    margin-right: -453px;
     transition: all 0.2s ease-in-out;
     &.show {
         margin-right: 0px;
@@ -19,8 +19,7 @@
         padding-left: 30px;
         text-transform: uppercase;
     }
-    &__date-range {
-        width: 150px;
-        text-align: center;
+    & .react-calendar {
+        width: 303px;
     }
 }
