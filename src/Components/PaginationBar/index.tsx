@@ -96,8 +96,8 @@ export const PaginationBar: React.FC<IPaginationBarProps> = React.memo((props) =
 
     return !totalRecords || totalPages === 1
         ? null
-        : <div className="d-flex align-items-center mt-3">
-            <Pagination size={size} listClassName="m-0">
+        : <div className="d-flex align-items-center justify-content-center mt-3">
+            <Pagination size={size} listClassName="m-0 custom-pagination">
                 <PaginationItem disabled={currentPage === 1} >
                     <PaginationLink first onClick={setPage(1)} />
                 </PaginationItem>
@@ -130,6 +130,6 @@ export const PaginationBar: React.FC<IPaginationBarProps> = React.memo((props) =
                 {perpageOptions.map((item, index) => <option key={`perpage_item_${index}`} value={item}> {item} / trang </option>)}
             </Input>
             }
-            <b className="ml-2">{totalRecords} task</b>
+            {/* <b className="ml-2">{totalRecords} task</b> */}
         </div >
 })
