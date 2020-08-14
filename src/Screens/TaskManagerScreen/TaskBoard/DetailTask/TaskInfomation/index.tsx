@@ -11,11 +11,22 @@ interface ITaskInfomationProps {
 }
 
 export const TaskInfomation: React.FC<ITaskInfomationProps> = ({ task_selected, }) => {
+    const bankInformation = task_selected.bank_information;
+
     return <React.Fragment>
         <Row>
-            <Col md={12}><div className="detail-task__title">{task_selected?.cs_note}</div></Col>
-            <Col md={12}>
-                <div className="my-2">
+            <Col md={8}>
+                <h2>{task_selected.so_id} - {task_selected.order_id}</h2>
+            </Col>
+            <Col md={4}><CardText><b>Ngày mua: </b><span className="text-muted">({Utils.FormatDateBy_DD_MM_YYYY(task_selected.bought_at)})</span></CardText></Col>
+
+            <Col md={12} className="mb-2">
+                <CardText><b>Mã trả hàng: </b>{task_selected.return_id ? task_selected.return_id : <span className="text-muted">(Không có)</span>}</CardText>
+            </Col>
+
+            <Col md={12} className="my-2"><div className="detail-task__title text-capitalize">{task_selected?.cs_note}</div></Col>
+            <Col md={12} className="mb-4">
+                <div>
                     {task_selected?.failure_type_names.map((item, index) =>
                         <Badge
                             color="primary"
@@ -25,28 +36,37 @@ export const TaskInfomation: React.FC<ITaskInfomationProps> = ({ task_selected, 
                         </Badge>)}
                 </div>
             </Col>
-        </Row>
-        <Row>
-            <Col md={4}><CardText><b>SO: </b>{task_selected.order_id}</CardText></Col>
-            <Col md={4}><CardText><b>Order: #</b>{task_selected.order_id}</CardText></Col>
-            <Col md={4}><CardText><b>Return: #</b>{task_selected.return_id}</CardText></Col>
 
-            <Col md={4}><CardText><b>Bought at: </b>{Utils.FormatDateBy_DD_MM_YYYY(task_selected.bought_at)}</CardText></Col>
-            <Col md={4}><CardText><b>Transfer cash: </b>{Utils.formatCurrency(task_selected.transferred_cash)}</CardText></Col>
+            <Col md={4}>
+                <CardText>
+                    <b>Số tiền đã chuyển:</b> <b className="text-success">{Utils.formatCurrency(task_selected.transferred_cash)}</b>
+                </CardText>
+            </Col>
 
-            <Col md={4}><CardText><b>Quantity: </b>{task_selected.quantity_counter}</CardText></Col>
-            <Col md={4}><CardText><b>Invoice: </b>{task_selected.total}</CardText></Col>
-            <Col md={4}><CardText><b>Order status: </b> <span className="text-danger">{task_selected.order_status}</span></CardText></Col>
+            <Col md={4}><CardText><b>Số lượng: </b>{task_selected.quantity_counter}</CardText></Col>
+            <Col md={4}><CardText><b>Số tiền thanh toán: </b><b className="text-success">{Utils.formatCurrency(task_selected.total)}</b></CardText></Col>
+            <Col md={4}><CardText><b>Trạng thái đơn hàng: </b> <span className="text-danger">{task_selected.order_status}</span></CardText></Col>
 
-            <Col md={4}><CardText><b>Business name</b>: {task_selected.business_name}</CardText></Col>
-            <Col md={4}><CardText><b>Username: </b>{task_selected.user_name}</CardText></Col>
-            <Col md={4}><CardText><b>Phone: </b>{task_selected.user_phone}</CardText></Col>
-            {!_.isEmpty(task_selected.bank_information)
+            <Col md={4}><CardText><b>Tên doanh nghiệp: </b><span className="text-capitalize">{task_selected.business_name}</span></CardText></Col>
+            <Col md={4}><CardText><b>Họ tên KH: </b><span className="text-capitalize">{task_selected.user_name}</span></CardText></Col>
+            <Col md={4}><CardText><b>Số điện thoại: </b>{task_selected.user_phone}</CardText></Col>
+            <Col md={4}><CardText></CardText></Col>
+
+            <Col md={12}><CardText><h5 className="my-3">* Thông tin ngân hàng:</h5></CardText></Col>
+
+            {!_.isEmpty(bankInformation)
                 && <React.Fragment>
-                    <Col md={4}><CardText><b>Account name:</b> {task_selected.bank_information.account_name}</CardText></Col>
-                    <Col md={4}><CardText><b>Account number:</b> {task_selected.bank_information.account_number}</CardText></Col>
-                    <Col md={4}><CardText><b>Bank: </b>{task_selected.bank_information.bank_name} - {task_selected.bank_information.branch_name}</CardText></Col>
+                    <Col md={4}><CardText><b>Tên khách hàng:</b> <span className="text-capitalize">{bankInformation.account_name}</span></CardText></Col>
+                    <Col md={4}><CardText><b>Số tài khoản:</b> {bankInformation.account_number}</CardText></Col>
+                    <Col md={4}><CardText><b>Ngân hàng: </b><span className="text-capitalize">{bankInformation.bank_name} - {bankInformation.branch_name}</span></CardText></Col>
                 </React.Fragment>}
+
+            {_.isEmpty(bankInformation)
+            && <React.Fragment>
+                <Col md={4}><CardText><b>Tên khách hàng:</b> <span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
+                <Col md={4}><CardText><b>Số tài khoản:</b> <span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
+                <Col md={4}><CardText><b>Ngân hàng: </b><span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
+            </React.Fragment>}
         </Row>
     </React.Fragment>
 }

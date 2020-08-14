@@ -22,7 +22,7 @@ export const AssignAndStatusTaskControl: React.FC<IAssignAndStatusTaskControlPro
         FilterListMember(filtermember)
     }
 
-    return <Row className="my-4">
+    return <Row className="mt-1 mb-3">
         <Col>
             <Select
                 defaultValue={{ label: DefaultValue.listAssignGroup[task_selected.assign_group], value: task_selected.assign_group }}

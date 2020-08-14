@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Modal, ModalHeader, ModalBody, Container, FormGroup } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Container, FormGroup, CardText, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import _ from "lodash";
@@ -53,28 +53,29 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ location, tas
 
     return selected_task && task_manager.task_selected !== null
         ? <Modal isOpen={modal}
-            style={{ position: "absolute", right: 0, margin: 0, height: "100vh" }}
+            style={{ position: "absolute", right: 0, margin: 0, height: "100vh", display: "grid" }}
             toggle={goBack}
             size="xl"
             contentClassName="h-100"
             modalTransition={{ baseClass: `animate__animated animate__faster ${modal ? "animate__slideInRight " : "animate__slideOutRight"}`, timeout: 200 }}
         >
             <ModalHeader toggle={goBack}>
-                <FormGroup row className="mb-0">
+                <FormGroup row className="mb-0 font-smaller col-12">
                     <div className="container">
                         {Utils.FormatDateBy_DD_MM_YYYY(task_manager.task_selected?.created_at)} - {Utils.converTime(task_manager.task_selected?.created_at)}
                     </div>
                     <div className="container">
                         <div className="float-left inline-block mr-2">Người tạo:</div>
-                        <div className="text-muted"> {task_manager.task_selected?.created_by}</div>
+                        <div className="text-muted"> { task_manager.task_selected?.created_by ? task_manager.task_selected?.created_by : `Khách hàng ${task_manager.task_selected?.user_name}` }</div>
                     </div>
                 </FormGroup>
             </ModalHeader>
-            <ModalBody className="detail-task">
-                <div ref={refDetail}>
+            <ModalBody>
+                <div ref={refDetail} className="detail-task">
                     <div className="detail-task__body">
                         <Container>
                             <TaskInfomation task_selected={task_manager.task_selected} />
+                            <h5 className="mt-3">* Bộ phận tiếp nhận:</h5>
                             <AssignAndStatusTaskControl list_member={task_manager.list_member} task_selected={task_manager.task_selected} />
                             <FeedbackInformation task_selected={task_manager.task_selected} />
                             <Description />
