@@ -27,9 +27,9 @@ export const TaskInfomation: React.FC<ITaskInfomationProps> = ({ task_selected, 
             </Col>
         </Row>
         <Row>
-            <Col md={4}><CardText><b>SO#: </b>{task_selected.order_id}</CardText></Col>
-            <Col md={4}><CardText><b>Order#: </b>{task_selected.order_id}</CardText></Col>
-            <Col md={4}><CardText><b>Return#: </b>{task_selected.return_id}</CardText></Col>
+            <Col md={4}><CardText><b>SO: </b>{task_selected.order_id}</CardText></Col>
+            <Col md={4}><CardText><b>Order: #</b>{task_selected.order_id}</CardText></Col>
+            <Col md={4}><CardText><b>Return: #</b>{task_selected.return_id}</CardText></Col>
 
             <Col md={4}><CardText><b>Bought at: </b>{Utils.FormatDateBy_DD_MM_YYYY(task_selected.bought_at)}</CardText></Col>
             <Col md={4}><CardText><b>Transfer cash: </b>{Utils.formatCurrency(task_selected.transferred_cash)}</CardText></Col>

@@ -5,20 +5,21 @@ import { GET_LIST_TASK_SUCCESS, UPDATE_USER_INPUT, IUserInput, LOADING_TABLE, CR
 import { RootState } from 'Store';
 import _ from 'lodash';
 
-const getListTask = () => (dispatch: Dispatch<RootAction>, getState: () => RootState) => {
+const getListTask = (own?: number) => (dispatch: Dispatch<RootAction>, getState: () => RootState) => {
   const {
-    task_manager: { userInput },
+    task_manager: { userInput, loading },
   } = getState();
-  const { assigned_member_id, from, per_page, to, created_by_id, failure_type_ids, page, so_id, status, user_id } = userInput;
+  const { from, per_page, to, created_by_id, failure_type_ids, so_id, status, user_id } = userInput;
+  if (!loading) dispatch({ type: LOADING_TABLE });
   get_list_cs_task({
-    page: page,
+    page: 1,
     per_page: per_page,
     from: from,
     to: to,
     failure_type_ids: failure_type_ids.map((it) => it.value),
     user_id: user_id,
-    assigned_member_id: assigned_member_id ? assigned_member_id.value : null,
     created_by_id: created_by_id ? created_by_id.value : null,
+    assigned_member_id: own ? own : null,
     so_id: so_id,
     status: status ? status.value : null,
   }).then((rsp) => {

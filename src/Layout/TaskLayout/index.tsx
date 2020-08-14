@@ -8,23 +8,18 @@ import * as  Screens from "Screens";
 
 const TaskLayout: React.FC<{}> = () => {
     let { path } = useRouteMatch();
-
     return <div className="task-wrapper">
         <Header />
         <SideBar />
         <div className="task-page">
             <Switch>
-                <Route path={`${path}/task-manager/all-case`} component={Screens.TaskManagerScreen} />
+                {/* <Route path={`${path}/task-manager/all-case`} component={Screens.TaskManagerScreen} /> */}
+                <Route path={`${path}/task-manager/:own`} component={Screens.TaskManagerScreen} />
                 <Route path={`${path}/files`} component={Topic} />
-                <Route path={`${path}/task-manager/my-case`} component={MyCase} />
                 <Redirect to={`${path}/task-manager/all-case`} />
             </Switch>
         </div>
     </div>
-}
-
-const MyCase = () => {
-    return <div>My Case</div>
 }
 
 const Topic = () => {

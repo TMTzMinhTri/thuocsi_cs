@@ -11,17 +11,16 @@ import * as Components from "Components";
 interface IListTaskProps extends RouteComponentProps {
     loading: boolean,
     cs_tasks: Icstasks[],
-    path: string,
     taskSelected: number
 }
 
-export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks, history, path, taskSelected }) => {
+export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks, history, taskSelected, location }) => {
     const handleClick = (id: number) => {
-        return history.replace(`${path}?selected_task=${id}`)
+        return history.replace(`${location.pathname}?selected_task=${id}`)
     }
     return <tbody>
         {loading
-            ? renderTableRow(<Components.Loading/>)
+            ? renderTableRow(<Components.Loading />)
             : cs_tasks.length > 0
                 ? cs_tasks.map((item, index) =>
                     <tr
@@ -29,7 +28,7 @@ export const ListTaskComponent: React.FC<IListTaskProps> = ({ loading, cs_tasks,
                         onClick={() => handleClick(item.id)}
                         className={classNames("cursor-pointer", { "active": taskSelected === item.id })}>
                         <td>
-                            <Link to={`${path}?selected_task=${item.id}`}>{item.id}</Link>
+                            <Link to={`${location.pathname}?selected_task=${item.id}`}>{item.id}</Link>
                         </td>
                         <td>{item.so_id}</td>
                         <td>{item.so_id}</td>

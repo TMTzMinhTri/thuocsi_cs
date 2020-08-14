@@ -1,0 +1,12 @@
+.feedback {
+  &__img {
+    transition: transform .2s; /* Animation */
+
+    &:hover {
+      transform: scale(1.5);
+      width: 450px;
+      height: 450px;
+      z-index: 1;
+    }
+  }
+}

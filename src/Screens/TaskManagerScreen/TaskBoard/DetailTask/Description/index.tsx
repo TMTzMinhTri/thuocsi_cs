@@ -29,7 +29,7 @@ export const Description: React.FC<{}> = () => {
     }, [quill]);
 
     if (Quill && !quill) {
-        Quill.register('modules/counter', function (quill, options) {
+        Quill.register('modules/counter', function (quill) {
             quill.on('text-change', function () {
                 setText(quill.scrollingContainer.innerHTML)
             });

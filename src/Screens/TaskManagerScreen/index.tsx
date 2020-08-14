@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { RootAction } from 'Interface/Store/index.types';
 import { getListTask, getListTaskByFilter, getListMemberAndReason } from 'Store/actions/task_manager.actions';
 import { Card, CardBody, Row, Col, Button, Container } from 'reactstrap';
-import { useRouteMatch, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, useParams } from 'react-router-dom';
 import { TaskBoard } from './TaskBoard';
 import { FilterControl } from './FilterControl';
 import * as Components from "Components";
@@ -13,7 +13,8 @@ import { IUserInput } from 'Interface/Store/task_manager.types';
 import Utils from "Utils";
 
 const mapState = (state: RootState) => ({
-  task_manager_state: state.task_manager
+  task_manager_state: state.task_manager,
+  current_user: state.layout.user.id
 })
 
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
@@ -24,15 +25,18 @@ const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
 
 type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & RouteComponentProps
 
-export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task_manager_state, getListTaskByFilter, history, getListMemberAndReason }) => {
-  let { path } = useRouteMatch();
+export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task_manager_state, getListTaskByFilter, history, getListMemberAndReason, current_user }) => {
+  let { own } = useParams();
   let { selected_task } = Utils.getQueryparams(["selected_task"])
   const refFilter = React.useRef<HTMLDivElement>()
 
   React.useEffect(() => {
-    getListTask()
     getListMemberAndReason()
-  }, [getListTask, getListMemberAndReason])
+  }, [getListMemberAndReason])
+
+  React.useEffect(() => {
+    getListTask(own === "my-case" ? current_user : null)
+  }, [getListTask, own, current_user])
 
   const handlePagination = React.useCallback((value) => {
     const { userInput } = task_manager_state
@@ -40,9 +44,8 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
       ...userInput,
       page: value
     }
-    if (selected_task) history.replace(path)
     getListTaskByFilter(user_input)
-  }, [getListTaskByFilter, task_manager_state, selected_task, history, path])
+  }, [getListTaskByFilter, task_manager_state])
 
   const showFilter = () => refFilter.current?.classList.toggle('show')
   return <div className="d-flex">
@@ -60,17 +63,16 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
         </Col>
         <div className="col-lg-12 stretch-card">
           <Card>
-              <TaskBoard
-                cs_tasks={task_manager_state.cs_tasks}
-                path={path}
-                loading={task_manager_state.loading}
-                taskSelected={parseInt(selected_task)} />
-              <Components.PaginationBar
-                current={task_manager_state.userInput.page}
-                perpage={30}
-                totalRecords={task_manager_state.total_count}
-                size={"sm"}
-                onChangePage={(value: number) => handlePagination(value)} />
+            <TaskBoard
+              cs_tasks={task_manager_state.cs_tasks}
+              loading={task_manager_state.loading}
+              taskSelected={parseInt(selected_task)} />
+            <Components.PaginationBar
+              current={task_manager_state.userInput.page}
+              perpage={30}
+              totalRecords={task_manager_state.total_count}
+              size={"sm"}
+              onChangePage={(value: number) => handlePagination(value)} />
           </Card>
         </div>
       </Row>
