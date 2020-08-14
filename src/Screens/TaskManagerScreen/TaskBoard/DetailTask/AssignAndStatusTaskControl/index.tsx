@@ -27,8 +27,7 @@ export const AssignAndStatusTaskControl: React.FC<IAssignAndStatusTaskControlPro
             <Select
                 defaultValue={{ label: DefaultValue.listAssignGroup[task_selected.assign_group], value: task_selected.assign_group }}
                 options={assignGroup}
-                onChange={changeAssignGroup}
-            />
+                onChange={changeAssignGroup} />
         </Col>
         <Col>
             <Select
@@ -39,8 +38,7 @@ export const AssignAndStatusTaskControl: React.FC<IAssignAndStatusTaskControlPro
         <Col>
             <Select
                 defaultValue={{ label: task_selected.status, value: task_selected.status }}
-                options={DefaultValue.listTaskStatus.map(it => ({ label: it.name, value: it.key }))}
-            />
+                options={DefaultValue.listTaskStatus.map(it => ({ label: it.name, value: it.key }))} />
         </Col>
     </Row>
 }

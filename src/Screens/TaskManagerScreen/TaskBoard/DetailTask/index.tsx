@@ -14,6 +14,7 @@ import { CommentList } from './CommentList';
 import { CommentInput } from './CommentInput';
 import { AssignAndStatusTaskControl } from './AssignAndStatusTaskControl';
 import { TaskInfomation } from './TaskInfomation';
+import { Description } from './Description';
 
 interface IPropsComponent extends RouteComponentProps {
     path: string,
@@ -60,12 +61,13 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ path, task_ma
             modalTransition={{ baseClass: `animate__animated animate__faster ${modal ? "animate__slideInRight " : "animate__slideOutRight"}`, timeout: 200 }}
         >
             <ModalHeader toggle={goBack}><div>{Utils.FormatDateBy_DD_MM_YYYY(task_manager.task_selected?.created_at)} - {Utils.converTime(task_manager.task_selected?.created_at)}</div></ModalHeader>
-            <ModalBody>
-                <div ref={refDetail} className="detail-task">
+            <ModalBody className="detail-task">
+                <div ref={refDetail} >
                     <div className="detail-task__body">
                         <Container>
                             <TaskInfomation task_selected={task_manager.task_selected} />
                             <AssignAndStatusTaskControl list_member={task_manager.list_member} task_selected={task_manager.task_selected} />
+                            <Description />
                             <div className="detail-task__activity" >
                                 <CommentInput name={selected_task} CreateComment={createCommentInTask} currentUser={currentUser} comments={task_manager.task_selected.comments} />
                                 <CommentList comments={task_manager.task_selected.comments} />

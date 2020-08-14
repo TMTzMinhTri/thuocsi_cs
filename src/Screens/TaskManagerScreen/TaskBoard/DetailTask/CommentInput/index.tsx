@@ -73,7 +73,7 @@ export const CommentInputComponent: React.FC<IProps> = ({ name, CreateComment, c
                     )}
                 </Formik>
                 : <Components.Can role={currentUser?.roles} action="create:task">
-                    <div onClick={(toggleInput)} className="detail-task__comment-placeholder">Add a comment...</div>
+                    <div onClick={(toggleInput)} className="detail-task__placeholder">Add a comment...</div>
                 </Components.Can>}
         </div>
     </FormGroup>
