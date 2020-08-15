@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Modal, ModalHeader, ModalBody, Container, FormGroup, CardText, Col } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Container, FormGroup } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import _ from "lodash";

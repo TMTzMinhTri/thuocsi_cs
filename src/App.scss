@@ -59,7 +59,7 @@
 
 /* === Components === */
 
-@import "stylesheets/styles/components/sticky_table";
+// @import "stylesheets/styles/components/sticky_table";
 @import "Components/Loading/index.scss";
 
 /* === Plugin Overrides === */
@@ -73,6 +73,7 @@
 @import "Screens/TaskManagerScreen/TaskBoard/DetailTask/index.scss";
 @import "Screens/TaskManagerScreen/TaskBoard/DetailTask/CommentList/index.scss";
 @import "Screens/TaskManagerScreen/TaskBoard/DetailTask/FeedbackInformation/index.scss";
+@import "Screens/TaskManagerScreen/TaskBoard/index.scss";
 
 // TaskLayout
 

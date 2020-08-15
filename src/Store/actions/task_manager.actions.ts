@@ -9,7 +9,7 @@ const getListTask = (own?: number) => (dispatch: Dispatch<RootAction>, getState:
   const {
     task_manager: { userInput, loading },
   } = getState();
-  const { from, per_page, to, created_by_id, failure_type_ids, page, so_id, status, user_id } = userInput;
+  const { from, per_page, to, created_by_id, failure_type_ids, so_id, status, user_id } = userInput;
   if (!loading) dispatch({ type: LOADING_TABLE });
   get_list_cs_task({
     page: 1,

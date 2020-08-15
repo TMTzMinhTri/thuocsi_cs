@@ -1,0 +1,58 @@
+.task-board__container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    .sticky_table {
+        height: calc(100vh - #{$navbar-height} - 9rem);
+        overflow-y: scroll;
+        table {
+            margin: 0;
+            width: 100%;
+            table-layout: fixed;
+        }
+        .row_id {
+            width: 70px;
+        }
+        .row_orderid {
+            width: 100px;
+
+        }
+        .row_issues {
+            width: calc(50% - 70px - 100px);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+    // .sticky_table {
+    //     background: #fff;
+
+    //     overflow-y: auto;
+    //     height: calc(100vh - #{$navbar-height} - 9rem);
+    //     width: 100%;
+    //     thead {
+    //         th {
+    //             height: 0px;
+    //             padding-top: 0;
+    //             padding-bottom: 0;
+    //             line-height: 0;
+    //             visibility: hidden;
+    //             white-space: nowrap;
+    //             div {
+    //                 visibility: visible;
+    //                 position: absolute;
+    //                 background: $white-smoke;
+    //                 padding: 9px 10px;
+    //                 top: 0;
+    //                 margin-left: -10px;
+    //                 line-height: normal;
+    //             }
+    //         }
+    //     }
+    //     tbody {
+    //         tr.active {
+    //             background-color: $gray-300;
+    //         }
+    //     }
+    // }
+}
