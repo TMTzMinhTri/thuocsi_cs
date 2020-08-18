@@ -6,6 +6,7 @@ import { RootState } from "Store";
 import { Dispatch, bindActionCreators } from "redux";
 import { RootAction } from "Interface/Store/index.types";
 import Logo from 'stylesheets/svg/logo_thuocsi.svg';
+import { signOut } from 'Store/actions/layout.actions';
 
 
 const mapState = (state: RootState) => ({
@@ -13,11 +14,12 @@ const mapState = (state: RootState) => ({
 })
 
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
+    signOut
 }, dispatch)
 
 type IProps = ReturnType<typeof mapState> & ReturnType<typeof mapAction>
 
-export const HeaderComponent: React.FC<IProps> = ({ user }) => {
+export const HeaderComponent: React.FC<IProps> = ({ user, signOut }) => {
     return user ? <div className="task-header">
         <div className="task-header__left">
         </div>
@@ -30,14 +32,10 @@ export const HeaderComponent: React.FC<IProps> = ({ user }) => {
                 <span>{user.name}</span>
             </DropdownToggle>
             <DropdownMenu right>
-                <DropdownItem header>Header</DropdownItem>
-                <DropdownItem disabled>Action</DropdownItem>
-                <DropdownItem>Another Action</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Another Action</DropdownItem>
+                <DropdownItem onClick={signOut}>Đăng xuất</DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
     </div> : null
 }
 
-export const Header = connect(mapState)(HeaderComponent)
+export const Header = connect(mapState, mapAction)(HeaderComponent)

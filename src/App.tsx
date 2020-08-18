@@ -10,7 +10,6 @@ import { getCurrentUser } from 'Store/actions/layout.actions';
 import { RootAction } from 'Interface/Store/index.types';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
-const AdminLayout = React.lazy(() => import('Layout/AdminLayout/index'))
 const TaskLayout = React.lazy(() => import("Layout/TaskLayout/index"))
 const LoginScreen = React.lazy(() => import('Screens/LoginScreen'))
 
@@ -34,11 +33,7 @@ const AppComponent: React.FC<IProps> = ({ layoutState, getUser, notification }) 
     <React.Suspense fallback={<div style={{ width: "100vw", height: "100vh" }}><Loading /></div>}>
       <ToastContainer />
       <Switch>
-        <Route path="/" exact render={() => <Redirect to="/admin" />} />
-        <PrivateRoute path="/admin"
-          component={AdminLayout}
-          loading={layoutState.loading}
-          isAuthenticated={layoutState.isAuthenticated} />
+        <Route path="/" exact render={() => <Redirect to="/task" />} />
         <PrivateRoute path='/task' component={TaskLayout} loading={layoutState.loading} isAuthenticated={layoutState.isAuthenticated} />
         <Route path="/login" exact component={LoginScreen} />
       </Switch>
