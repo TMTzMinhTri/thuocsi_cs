@@ -44,10 +44,10 @@ export const AssignAndStatusTaskControl: React.FC<IAssignAndStatusTaskControlPro
 }
 
 const FormatOptionLabel: React.FC<any> = (item) => (
-    _.isEmpty(item)
-        ? < div style={{ display: "flex", alignItems: "center" }}>
-            <Components.Avata name={item.label} target={`user_${item.value}`} />
-            <div className="ml-2"> {item.label}</div>
-        </div >
-        : <div>Unassigned</div>
+    // _.isEmpty(item)
+    < div style={{ display: "flex", alignItems: "center" }}>
+        <Components.Avata name={item.label ? item.label : "Unassigned"} target={`user_${item.value}`} />
+        <div className="ml-2"> {item.label ? item.label : "Unassigned"}</div>
+    </div >
+    // : <div>Unassigned</div>
 );

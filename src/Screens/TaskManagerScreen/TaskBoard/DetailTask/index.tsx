@@ -53,10 +53,10 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ location, tas
 
     return selected_task && task_manager.task_selected !== null
         ? <Modal isOpen={modal}
-            style={{ position: "absolute", right: 0, margin: 0, height: "100vh", display: "grid" }}
+            style={{ position: "absolute", right: 0, margin: 0, display: "grid" }}
             toggle={goBack}
             size="xl"
-            contentClassName="h-100"
+            scrollable
             modalTransition={{ baseClass: `animate__animated animate__faster ${modal ? "animate__slideInRight " : "animate__slideOutRight"}`, timeout: 200 }}
         >
             <ModalHeader toggle={goBack}>
@@ -66,12 +66,12 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ location, tas
                     </div>
                     <div className="container">
                         <div className="float-left inline-block mr-2">Người tạo:</div>
-                        <div className="text-muted"> { task_manager.task_selected?.created_by ? task_manager.task_selected?.created_by : `Khách hàng ${task_manager.task_selected?.user_name}` }</div>
+                        <div className="text-muted"> {task_manager.task_selected?.created_by ? task_manager.task_selected?.created_by : `Khách hàng ${task_manager.task_selected?.user_name}`}</div>
                     </div>
                 </FormGroup>
             </ModalHeader>
-            <ModalBody>
-                <div ref={refDetail} className="detail-task">
+            <ModalBody className="detail-task">
+                <div ref={refDetail} >
                     <div className="detail-task__body">
                         <Container>
                             <TaskInfomation task_selected={task_manager.task_selected} />

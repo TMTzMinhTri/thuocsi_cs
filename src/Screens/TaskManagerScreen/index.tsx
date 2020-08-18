@@ -62,7 +62,7 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
           </div>
         </Col>
         <div className="col-lg-12 stretch-card">
-          <Card>
+          <Card className="p-3">
             <TaskBoard
               cs_tasks={task_manager_state.cs_tasks}
               loading={task_manager_state.loading}

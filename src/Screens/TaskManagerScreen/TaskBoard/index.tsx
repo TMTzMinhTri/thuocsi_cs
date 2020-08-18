@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Table } from "reactstrap";
+import { Table, Badge } from "reactstrap";
 import { useTable } from 'react-table'
 import classnames from "classnames";
 
@@ -8,6 +8,7 @@ import { DetailTask } from "./DetailTask";
 // import { ListTask } from "./ListTask";
 import * as Components from "Components";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { StatusTask } from "Utils";
 
 interface ITaskBoardProps {
    cs_tasks: Icstasks[],
@@ -22,7 +23,8 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
       () => [{ Header: '#', accessor: 'id' },
       { Header: 'SO#', accessor: 'so_id' },
       { Header: 'Order#', accessor: 'order_id' },
-      { Header: 'Issue', accessor: 'cs_note' }],
+      { Header: 'Issue', accessor: 'cs_note' },
+      { Header: 'Agent', accessor: 'created_by' }],
       []
    )
 
@@ -36,7 +38,7 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
       return history.replace(`${location.pathname}?selected_task=${id}`)
    }
 
-   return <div className="d-flex">
+   return <div className="d-flex ">
       <div className="task-board__container">
          <div className="sticky_table">
             <Table {...getTableProps()} hover size="sm" >
@@ -48,14 +50,28 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
                         return (
                            <tr {...row.getRowProps()} onClick={() => showDetail(row.values.id)} className={classnames("cursor-pointer", { "active": taskSelected === row.values.id })}>
                               {row.cells.map(cell => {
-                                 return (
-                                    <td {...cell.getCellProps()}
-                                       className={classnames({ "row_issues": cell.column.id === "cs_note" })}
-                                       style={{
-                                          padding: '5px',
-                                       }}>
-                                       {cell.render('Cell')}
-                                    </td>
+                                 const data = cell.row.original
+                                 return (<td {...cell.getCellProps()}
+                                    className={classnames({ "row_issues": cell.column.id === "cs_note" })}
+                                    style={{
+                                       padding: '5px',
+                                    }}>
+                                    {cell.column.id === "created_by"
+                                       ? <div className="d-flex justify-content-end align-items-center">
+                                          <div className="d-flex flex-column align-items-end mr-2">
+                                             <Badge color={classnames(
+                                                { primary: data.status === StatusTask.assigned },
+                                                { danger: data.status === StatusTask.pending },
+                                                { success: data.status === StatusTask.done },
+                                                { secondary: data.status === StatusTask.canceled },
+                                                { info: data.status === StatusTask.in_progress }
+                                             )}>{data.status}</Badge>
+                                             <Components.TimeAgo datetime={data.created_at} />
+                                          </div>
+                                          <Components.Avata name={cell.value} target={`task-${data.id}`} />
+                                       </div>
+                                       : cell.render('Cell')}
+                                 </td>
                                  )
                               })}
                            </tr>
@@ -86,6 +102,7 @@ const header = (headerGroups) => {
                   { "row_id": column.id === "id" },
                   { "row_orderid": column.id === "order_id" || column.id === "so_id" },
                   { "row_issues": column.id === "cs_note" },
+                  { "text-right": column.id === "created_by" },
                )}>
                   {column.render('Header')}
                </th>

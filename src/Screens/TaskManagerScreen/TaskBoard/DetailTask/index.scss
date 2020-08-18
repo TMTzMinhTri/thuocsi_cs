@@ -1,8 +1,17 @@
+@media (min-width: 576px) {
+    .modal-dialog-scrollable .modal-content {
+        max-height: 100vh;
+    }
+}
+.modal-dialog-scrollable .modal-content {
+    max-height: 100vh;
+}
 .detail-task {
     overflow-y: auto;
     height: 100%;
     &__body {
     }
+
     &__title {
         font-size: 24px;
         font-weight: 500;

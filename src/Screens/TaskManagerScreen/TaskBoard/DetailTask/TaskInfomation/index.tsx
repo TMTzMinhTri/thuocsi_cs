@@ -39,7 +39,7 @@ export const TaskInfomation: React.FC<ITaskInfomationProps> = ({ task_selected, 
 
             <Col md={4}>
                 <CardText>
-                    <b>Số tiền đã chuyển:</b> <b className="text-success">{Utils.formatCurrency(task_selected.transferred_cash)}</b>
+                    <b>Số tiền đã chuyển:</b> <b className="text-success">{Utils.formatCurrency(task_selected.transferred_cash ? task_selected.transferred_cash : 0)}</b>
                 </CardText>
             </Col>
 
@@ -52,7 +52,7 @@ export const TaskInfomation: React.FC<ITaskInfomationProps> = ({ task_selected, 
             <Col md={4}><CardText><b>Số điện thoại: </b>{task_selected.user_phone}</CardText></Col>
             <Col md={4}><CardText></CardText></Col>
 
-            <Col md={12}><CardText><h5 className="my-3">* Thông tin ngân hàng:</h5></CardText></Col>
+            <Col md={12}><CardText tag="h5" className="my-3">* Thông tin ngân hàng: </CardText></Col>
 
             {!_.isEmpty(bankInformation)
                 && <React.Fragment>
@@ -62,11 +62,11 @@ export const TaskInfomation: React.FC<ITaskInfomationProps> = ({ task_selected, 
                 </React.Fragment>}
 
             {_.isEmpty(bankInformation)
-            && <React.Fragment>
-                <Col md={4}><CardText><b>Tên khách hàng:</b> <span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
-                <Col md={4}><CardText><b>Số tài khoản:</b> <span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
-                <Col md={4}><CardText><b>Ngân hàng: </b><span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
-            </React.Fragment>}
+                && <React.Fragment>
+                    <Col md={4}><CardText><b>Tên khách hàng:</b> <span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
+                    <Col md={4}><CardText><b>Số tài khoản:</b> <span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
+                    <Col md={4}><CardText><b>Ngân hàng: </b><span className="text-muted">(Chưa cập nhật)</span></CardText></Col>
+                </React.Fragment>}
         </Row>
     </React.Fragment>
 }

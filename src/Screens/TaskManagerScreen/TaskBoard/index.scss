@@ -3,7 +3,7 @@
     overflow: hidden;
     width: 100%;
     .sticky_table {
-        height: calc(100vh - #{$navbar-height} - 9rem);
+        height: calc(100vh - #{$navbar-height} - 10rem);
         overflow-y: scroll;
         table {
             margin: 0;
