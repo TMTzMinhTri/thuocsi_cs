@@ -82,7 +82,6 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
          </div>
       </div>
       {!loading && <DetailTask />}
-      {/* <ListTask cs_tasks={cs_tasks} loading={loading} taskSelected={taskSelected} /> */}
    </div>
 })
 export const TaskBoard = withRouter(TaskBoardComponent)

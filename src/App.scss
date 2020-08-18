@@ -48,27 +48,12 @@
 /* === Icon fonts === */
 @import "~font-awesome/scss/font-awesome";
 
-/* === Template mixins === */
-@import "stylesheets/styles/base/animation";
-
-/* === Core Styles === */
-@import "stylesheets/styles/reset";
-@import "./stylesheets/styles/misc";
-@import "stylesheets/styles/utilities";
-@import "./stylesheets/styles/spinner";
-
-/* === Components === */
-
-// @import "stylesheets/styles/components/sticky_table";
 @import "Components/Loading/index.scss";
 
 /* === Plugin Overrides === */
 
 /* === Layout === */
-@import "./stylesheets/styles/navbar";
-@import "./stylesheets/styles/sidebar";
 // @import "stylesheets/styles/footer";
-@import "stylesheets/styles/layout";
 
 @import "Screens/TaskManagerScreen/TaskBoard/DetailTask/index.scss";
 @import "Screens/TaskManagerScreen/TaskBoard/DetailTask/CommentList/index.scss";
