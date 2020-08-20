@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Label, FormGroup } from 'reactstrap';
 import Select from "react-select";
 import { DefaultValue } from "Utils";
 import { Icstasks } from 'Interface/Response/task_manager.types';
@@ -22,23 +22,35 @@ export const AssignAndStatusTaskControl: React.FC<IAssignAndStatusTaskControlPro
         FilterListMember(filtermember)
     }
 
-    return <Row className="mt-1 mb-3">
+    return <Row>
         <Col>
-            <Select
-                defaultValue={{ label: DefaultValue.listAssignGroup[task_selected.assign_group], value: task_selected.assign_group }}
-                options={assignGroup}
-                onChange={changeAssignGroup} />
+            <FormGroup>
+                <Label for="assignGroup">Assign Group</Label>
+                <Select
+                    inputId="assignGroup"
+                    defaultValue={{ label: DefaultValue.listAssignGroup[task_selected.assign_group], value: task_selected.assign_group }}
+                    options={assignGroup}
+                    onChange={changeAssignGroup} />
+            </FormGroup>
         </Col>
         <Col>
-            <Select
-                defaultValue={{ value: task_selected.assigned_member_id, label: task_selected.assigned_member_name }}
-                formatOptionLabel={FormatOptionLabel}
-                options={listMemberFilterd} />
+            <FormGroup>
+                <Label for="assign_member">Assign member</Label>
+                <Select
+                    inputId="assign_member"
+                    defaultValue={{ value: task_selected.assigned_member_id, label: task_selected.assigned_member_name }}
+                    formatOptionLabel={FormatOptionLabel}
+                    options={listMemberFilterd} />
+            </FormGroup>
         </Col>
         <Col>
-            <Select
-                defaultValue={{ label: task_selected.status, value: task_selected.status }}
-                options={DefaultValue.listTaskStatus.map(it => ({ label: it.name, value: it.key }))} />
+            <FormGroup>
+                <Label for="status_task">Status task</Label>
+                <Select
+                    inputId="status_task"
+                    defaultValue={{ label: task_selected.status, value: task_selected.status }}
+                    options={DefaultValue.listTaskStatus.map(it => ({ label: it.name, value: it.key }))} />
+            </FormGroup>
         </Col>
     </Row>
 }

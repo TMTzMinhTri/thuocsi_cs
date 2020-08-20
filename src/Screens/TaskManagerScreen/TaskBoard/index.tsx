@@ -23,7 +23,8 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
       () => [{ Header: '#', accessor: 'id' },
       { Header: 'SO#', accessor: 'so_id' },
       { Header: 'Order#', accessor: 'order_id' },
-      { Header: 'Issue', accessor: 'cs_note' },
+      { Header: 'Case subject', accessor: 'cs_note' },
+      { Header: 'Account', accessor: 'user_name' },
       { Header: 'Agent', accessor: 'created_by' }],
       []
    )
@@ -44,7 +45,7 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
             <Table {...getTableProps()} hover size="sm" >
                {header(headerGroups)}
                <tbody {...getTableBodyProps()}>
-                  {loading ? renderTableRow(<Components.Loading />)
+                  {loading && cs_tasks.length > 0 ? renderTableRow(<Components.Loading />)
                      : rows.map(row => {
                         prepareRow(row)
                         return (
@@ -52,7 +53,13 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
                               {row.cells.map(cell => {
                                  const data = cell.row.original
                                  return (<td {...cell.getCellProps()}
-                                    className={classnames({ "row_issues": cell.column.id === "cs_note" })}
+                                    className={classnames(
+                                       { "row_issues": cell.column.id === "cs_note" },
+                                       { "row_id": cell.column.id === "id" },
+                                       { "row_orderid": cell.column.id === "order_id" || cell.column.id === "so_id" },
+                                       { "row_issues": cell.column.id === "cs_note" },
+                                       { "row_account": cell.column.id === "user_name" },
+                                       { "row_agent": cell.column.id === "created_by" })}
                                     style={{
                                        padding: '5px',
                                     }}>
@@ -82,7 +89,7 @@ export const TaskBoardComponent: React.FC<IProps> = React.memo(({ cs_tasks, load
          </div>
       </div>
       {!loading && <DetailTask />}
-   </div>
+   </div >
 })
 export const TaskBoard = withRouter(TaskBoardComponent)
 
@@ -97,11 +104,13 @@ const header = (headerGroups) => {
       {headerGroups.map(headerGroup => {
          return <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => {
+               console.log(column.id)
                return <th {...column.getHeaderProps()} className={classnames(
                   { "row_id": column.id === "id" },
                   { "row_orderid": column.id === "order_id" || column.id === "so_id" },
                   { "row_issues": column.id === "cs_note" },
-                  { "text-right": column.id === "created_by" },
+                  { "row_account": column.id === "user_name" },
+                  { "row_agent": column.id === "created_by" },
                )}>
                   {column.render('Header')}
                </th>

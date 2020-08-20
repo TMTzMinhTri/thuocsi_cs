@@ -23,6 +23,16 @@
             text-overflow: ellipsis;
             overflow: hidden;
         }
+        .row_agent {
+            text-align: right;
+            width: 150px;
+        }
+        .row_account{
+            width: 200px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
     }
     // .sticky_table {
     //     background: #fff;

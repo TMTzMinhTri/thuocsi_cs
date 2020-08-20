@@ -14,7 +14,7 @@ export const SelectReason: React.FC<ISelectReasonProps> = ({ listReason, reasons
     return <FormGroup>
         <Label >Lý do</Label>
         <MultiSelect
-            options={listReason.map(item => ({ label: item.name, value: item.id }))}
+            options={listReason && listReason.length > 0 ? listReason.map(item => ({ label: item.name, value: item.id })) : [{ label: "", value: null }]}
             value={reasons}
             onChange={(value) => handleOnSelect({ type: "failure_type_ids", value })}
             valueRenderer={(selected) => `${selected.length} items`}
