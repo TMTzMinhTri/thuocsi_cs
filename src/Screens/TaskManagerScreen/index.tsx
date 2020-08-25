@@ -11,6 +11,7 @@ import { FilterControl } from './FilterControl';
 import * as Components from "Components";
 import { IUserInput } from 'Interface/Store/task_manager.types';
 import Utils from "Utils";
+import { CreateTask } from './CreateTask';
 
 const mapState = (state: RootState) => ({
   task_manager_state: state.task_manager,
@@ -29,6 +30,7 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
   let { own } = useParams();
   let { selected_task } = Utils.getQueryparams(["selected_task"])
   const refFilter = React.useRef<HTMLDivElement>()
+  const [isOpenModal, setOpenModal] = React.useState(false);
 
   React.useEffect(() => {
     getListMemberAndReason()
@@ -48,6 +50,11 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
   }, [getListTaskByFilter, task_manager_state])
 
   const showFilter = () => refFilter.current?.classList.toggle('show')
+
+  const toggleCreateTask = () => {
+    setOpenModal(!isOpenModal)
+  }
+
   return <div className="d-flex">
     <Container fluid>
       <Row>
@@ -57,6 +64,10 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
               <Button color="primary" onClick={showFilter} outline>
                 <span className="mr-2">Fillter</span>
                 <i className="fa fa-filter" aria-hidden="true"></i>
+              </Button>
+              <Button color="primary" onClick={toggleCreateTask} outline>
+                <span className="mr-2">Create</span>
+                <i className="fa fa-plus" aria-hidden="true"></i>
               </Button>
             </CardBody>
           </div>
@@ -78,6 +89,7 @@ export const TaskManagerScreenComponent: React.FC<Iprops> = ({ getListTask, task
       </Row>
     </Container>
     <FilterControl ref={refFilter} showFilter={showFilter} />
+    <CreateTask isOpenModal={isOpenModal} toggle={toggleCreateTask} />
   </div>
 
 }

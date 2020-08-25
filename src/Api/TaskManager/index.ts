@@ -1,6 +1,6 @@
 import { Api } from '..';
-import { IResponeListTasks, IResponeListReason } from 'Interface/Response/task_manager.types';
-import { IFilterListTaskParams } from 'Interface/Store/task_manager.types';
+import { IResponeListTasks, IResponeListReason, IResponseSearchTask, Icstasks } from 'Interface/Response/task_manager.types';
+import { IFilterListTaskParams, IParamsPostCreateTask } from 'Interface/Store/task_manager.types';
 import { IResponseUser } from 'Interface/Response/session.types';
 
 export const getListAddress = () => {
@@ -20,4 +20,14 @@ export const getListReason = () => {
 export const getListMember = () => {
   const path = `/api/cs/v1/group_members`;
   return Api.get<IResponseUser[]>(path, false);
+};
+
+export const postSearchTask = (data: string) => {
+  const path = `/api/cs/v1/cs_tasks/search`;
+  return Api.post<IResponseSearchTask>(path, { search_text: data }, false);
+};
+
+export const postCreateTask = (data: IParamsPostCreateTask) => {
+  const path = `/api/cs/v1/cs_tasks`;
+  return Api.post<Icstasks>(path, data, false);
 };

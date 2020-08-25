@@ -1,4 +1,4 @@
-import { IResponeListTasks, IUserDetail, Icstasks, IResponeListReason } from 'Interface/Response/task_manager.types';
+import { IResponeListTasks, IUserDetail, Icstasks, IResponeListReason, IResponseSearchTask, IBankInfomation } from 'Interface/Response/task_manager.types';
 import { IResponseUser } from 'Interface/Response/session.types';
 
 export const GET_LIST_TASK_SUCCESS = 'GET_LIST_TASK_SUCCESS';
@@ -9,9 +9,11 @@ export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const TASK_SELECTED = 'TASK_SELECTED';
 export const GET_LIST_MEMBER = 'GET_LIST_MEMBER';
 export const GET_LIST_REASON = 'GET_LIST_REASON';
+export const SEARCH_TASK_SUCCESS = 'SEARCH_TASK_SUCCESS';
+export const CLEAR_DATA_SEARCH_TASK = 'CLEAR_DATA_SEARCH_TASK';
+export const CREATE_NEW_TASK = 'CREATE_NEW_TASK';
 
-//DEFINE ACTION
-
+//#region DEFINE ACTION
 export interface IGetListTaskAction {
   type: typeof GET_LIST_TASK_SUCCESS;
   payload: IResponeListTasks;
@@ -50,9 +52,22 @@ export interface IGetListReason {
   payload: IResponeListReason[];
 }
 
+export interface ISearchTaskSuccessAction {
+  type: typeof SEARCH_TASK_SUCCESS;
+  payload: IResponseSearchTask;
+}
+export interface IClearDataSearchTaskAction {
+  type: typeof CLEAR_DATA_SEARCH_TASK;
+}
+export interface ICreateNewTaskAction {
+  type: typeof CREATE_NEW_TASK;
+  payload: Icstasks;
+}
+
+//#endregion
 //
 
-// DEFINE REDUCER
+//#region DEFINE REDUCER
 export interface ITask_managerReducer {
   total_count: number;
   user_detail: IUserDetail | null;
@@ -62,7 +77,9 @@ export interface ITask_managerReducer {
   task_selected: Icstasks | null;
   list_member: IResponseUser[];
   list_reason: IResponeListReason[];
+  taskBySearch: IResponseSearchTask;
 }
+//#endregion
 
 //
 export interface IUserInput {
@@ -90,6 +107,17 @@ export interface IFilterListTaskParams {
   created_by_id: number | null;
   assigned_member_id: number;
 }
+export interface IParamsPostCreateTask {
+  cs_task: {
+    order_id: number;
+    return_id: number;
+    failure_types: Array<number>;
+    transferred_cash: number;
+    assign_group: string;
+    cs_note: string;
+  };
+  bank_information: IBankInfomation | {};
+}
 //
 export type TaskManagerActionTypes =
   | IGetListTaskAction
@@ -99,4 +127,7 @@ export type TaskManagerActionTypes =
   | ICreateCommentAction
   | ISelectedTaskAction
   | IGetListMember
-  | IGetListReason;
+  | IGetListReason
+  | ISearchTaskSuccessAction
+  | IClearDataSearchTaskAction
+  | ICreateNewTaskAction;

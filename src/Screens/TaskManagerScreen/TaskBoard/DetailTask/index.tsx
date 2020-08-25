@@ -57,7 +57,7 @@ export const DetailTaskComponent: React.FC<Iprops> = React.memo(({ location, tas
             toggle={goBack}
             size="xl"
             scrollable
-            modalTransition={{ baseClass: `animate__animated animate__faster ${modal ? "animate__slideInRight " : "animate__slideOutRight"}`, timeout: 200 }}
+            // modalTransition={{ baseClass: `animate__animated animate__faster ${modal ? "animate__zoomIn " : "animate__slideOutRight"}`, timeout: 200 }}
         >
             <ModalHeader toggle={goBack}>
                 <FormGroup row className="mb-0 font-smaller col-12">

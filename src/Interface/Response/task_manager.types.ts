@@ -4,6 +4,17 @@ export interface IResponeListTasks {
   cs_tasks: Array<Icstasks>;
 }
 
+export interface IResponseSearchTask {
+  bank_information: IBankInfomation;
+  orders: {
+    id: number;
+    so_id: number;
+    quantity_counter: number;
+    total: number;
+  };
+  cs_tasks: Array<Icstasks>;
+}
+
 export interface IResponeListReason {
   id: number;
   code: string;

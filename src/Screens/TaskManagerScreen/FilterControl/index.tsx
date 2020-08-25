@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardHeader, Spinner } from 'reactstrap';
 
 import { DatePicker } from "./DatePicker";
 import { SearchOrder } from "./SearchOrder";
@@ -19,8 +19,7 @@ interface IFilterControlComponentProps {
 }
 const mapState = (state: RootState) => ({
     userInputState: state.task_manager.userInput,
-    listMember: state.task_manager.list_member,
-    listReason: state.task_manager.list_reason
+    task_manager_state: state.task_manager
 })
 const mapAction = (dispatch: Dispatch<RootAction>) => bindActionCreators({
     getListTaskByFilter
@@ -29,8 +28,9 @@ type Iprops = ReturnType<typeof mapState> & ReturnType<typeof mapAction> & IFilt
 
 
 const FilterControlComponent = React.forwardRef<HTMLDivElement, Iprops>((props, ref) => {
+    const { task_manager_state: { loading, list_member, list_reason } } = props
     const [userInput, setUserInput] = React.useState<IUserInput>(props.userInputState)
-    
+
     const handleOnSelect = (value: { type: string, value: any }) => {
         setUserInput({ ...userInput, [value.type]: value.value })
     }
@@ -52,11 +52,15 @@ const FilterControlComponent = React.forwardRef<HTMLDivElement, Iprops>((props, 
                 <SearchOrder />
                 <DatePicker date={[userInput.from, userInput.to]} handleSelectDate={handleSelectDate} />
                 <SelectStatus handleOnSelect={handleOnSelect} status={userInput.status} />
-                <SelectReason listReason={props.listReason} reasons={userInput.failure_type_ids} handleOnSelect={handleOnSelect} />
-                <SelectAssignedMember listMember={props.listMember} assigned_member={userInput.assigned_member_id} handleOnSelect={handleOnSelect} />
-                <SelectCreater listMember={props.listMember} created_by={userInput.created_by_id} handleOnSelect={handleOnSelect} />
+                <SelectReason listReason={list_reason} reasons={userInput.failure_type_ids} handleOnSelect={handleOnSelect} />
+                <SelectAssignedMember listMember={list_member} assigned_member={userInput.assigned_member_id} handleOnSelect={handleOnSelect} />
+                <SelectCreater listMember={list_member} created_by={userInput.created_by_id} handleOnSelect={handleOnSelect} />
             </CardBody>
-            <CardFooter className="text-muted"><Button color="primary" block onClick={Filter}>Fillter</Button></CardFooter>
+            <CardFooter className="text-muted">
+                <Button color="primary" block onClick={Filter} disabled={loading}>
+                    Fillter {props.task_manager_state.loading && <Spinner size="sm" />}
+                </Button>
+            </CardFooter>
         </Card>
     </div>
 },

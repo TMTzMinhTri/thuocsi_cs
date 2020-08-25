@@ -1,4 +1,16 @@
-import { ITask_managerReducer, GET_LIST_TASK_SUCCESS, UPDATE_USER_INPUT, LOADING_TABLE, CREATE_COMMENT, TASK_SELECTED, GET_LIST_REASON, GET_LIST_MEMBER } from 'Interface/Store/task_manager.types';
+import {
+  ITask_managerReducer,
+  GET_LIST_TASK_SUCCESS,
+  UPDATE_USER_INPUT,
+  LOADING_TABLE,
+  CREATE_COMMENT,
+  TASK_SELECTED,
+  GET_LIST_REASON,
+  GET_LIST_MEMBER,
+  SEARCH_TASK_SUCCESS,
+  CLEAR_DATA_SEARCH_TASK,
+  CREATE_NEW_TASK,
+} from 'Interface/Store/task_manager.types';
 import { RootAction } from 'Interface/Store/index.types';
 
 // to: new Date(),
@@ -24,6 +36,7 @@ const initialState: ITask_managerReducer = {
   },
   list_member: [],
   list_reason: [],
+  taskBySearch: null,
 };
 
 export default function (state = initialState, action: RootAction): ITask_managerReducer {
@@ -63,6 +76,23 @@ export default function (state = initialState, action: RootAction): ITask_manage
       return {
         ...state,
         list_member: action.payload,
+      };
+    case SEARCH_TASK_SUCCESS:
+      return {
+        ...state,
+        taskBySearch: action.payload,
+      };
+    case CLEAR_DATA_SEARCH_TASK:
+      return {
+        ...state,
+        taskBySearch: null,
+      };
+    case CREATE_NEW_TASK:
+      const newCs_tasks = [...state.cs_tasks];
+
+      return {
+        ...state,
+        cs_tasks: [action.payload, ...newCs_tasks],
       };
     default:
       return { ...state };

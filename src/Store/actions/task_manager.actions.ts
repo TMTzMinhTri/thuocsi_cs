@@ -1,7 +1,20 @@
 import { RootAction } from 'Interface/Store/index.types';
 import { Dispatch } from 'redux';
-import { get_list_cs_task, getListMember, getListReason } from 'Api/TaskManager';
-import { GET_LIST_TASK_SUCCESS, UPDATE_USER_INPUT, IUserInput, LOADING_TABLE, CREATE_COMMENT, TASK_SELECTED, GET_LIST_MEMBER, GET_LIST_REASON } from 'Interface/Store/task_manager.types';
+import { get_list_cs_task, getListMember, getListReason, postSearchTask, postCreateTask } from 'Api/TaskManager';
+import {
+  GET_LIST_TASK_SUCCESS,
+  UPDATE_USER_INPUT,
+  IUserInput,
+  LOADING_TABLE,
+  CREATE_COMMENT,
+  TASK_SELECTED,
+  GET_LIST_MEMBER,
+  GET_LIST_REASON,
+  SEARCH_TASK_SUCCESS,
+  CLEAR_DATA_SEARCH_TASK,
+  IParamsPostCreateTask,
+  CREATE_NEW_TASK,
+} from 'Interface/Store/task_manager.types';
 import { RootState } from 'Store';
 import _ from 'lodash';
 
@@ -82,4 +95,32 @@ const selectDetailTask = (task_id: number | null, callback?: Function) => (dispa
   callback && callback(task);
 };
 
-export { getListTask, getListTaskByFilter, createCommentInTask, selectDetailTask, getListMemberAndReason };
+const searchTask = (search_text: string, callback?: Function) => (dispatch: Dispatch<RootAction>, getState: () => RootState) => {
+  const {
+    task_manager: { taskBySearch },
+  } = getState();
+
+  if (_.isEmpty(search_text)) {
+    if (!_.isEmpty(taskBySearch)) {
+      dispatch({ type: CLEAR_DATA_SEARCH_TASK });
+    }
+    callback();
+  } else {
+    _.debounce(() => {
+      postSearchTask(search_text).then((rsp) => {
+        rsp.data && dispatch({ type: SEARCH_TASK_SUCCESS, payload: rsp.data });
+        callback && callback(rsp.message);
+      });
+    }, 1000)();
+  }
+  return;
+};
+
+const createTask = (data: IParamsPostCreateTask, callback: Function) => (dispatch: Dispatch<RootAction>) => {
+  postCreateTask(data).then((rsp) => {
+    rsp.data && dispatch({ type: CREATE_NEW_TASK, payload: { ...rsp.data, comments: [{ id: _.random(1, 10), content: 'comment', created_at: new Date() }] } });
+    callback(rsp.message);
+  });
+};
+
+export { getListTask, getListTaskByFilter, createCommentInTask, selectDetailTask, getListMemberAndReason, searchTask, createTask };

@@ -104,7 +104,6 @@ const header = (headerGroups) => {
       {headerGroups.map(headerGroup => {
          return <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => {
-               console.log(column.id)
                return <th {...column.getHeaderProps()} className={classnames(
                   { "row_id": column.id === "id" },
                   { "row_orderid": column.id === "order_id" || column.id === "so_id" },
