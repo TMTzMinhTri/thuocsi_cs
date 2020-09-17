@@ -1,0 +1,1 @@
+(this.webpackJsonpcs=this.webpackJsonpcs||[]).push([[6],{224:function(e,t,r){"use strict";r.r(t);var a=r(0);t.default=function(){return a.createElement("div",{className:"hsl-page-error404--container"},a.createElement("div",{className:"hsl-page-error404--title"},"Kh\xf4ng t\xecm th\u1ea5y trang"),a.createElement("div",{className:"hsl-page-error404--content"}))}}}]);

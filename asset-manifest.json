@@ -1,0 +1,30 @@
+{
+  "files": {
+    "static/js/0.eea486eb.chunk.js": "/thuocsi_cs/static/js/0.eea486eb.chunk.js",
+    "main.css": "/thuocsi_cs/static/css/main.ee46842a.chunk.css",
+    "main.js": "/thuocsi_cs/static/js/main.de3f3ca9.chunk.js",
+    "runtime-main.js": "/thuocsi_cs/static/js/runtime-main.4b38ff64.js",
+    "static/css/3.b4121498.chunk.css": "/thuocsi_cs/static/css/3.b4121498.chunk.css",
+    "static/js/3.a9a0f724.chunk.js": "/thuocsi_cs/static/js/3.a9a0f724.chunk.js",
+    "static/css/4.618dbb9b.chunk.css": "/thuocsi_cs/static/css/4.618dbb9b.chunk.css",
+    "static/js/4.1c5e0632.chunk.js": "/thuocsi_cs/static/js/4.1c5e0632.chunk.js",
+    "static/js/5.1c25fd11.chunk.js": "/thuocsi_cs/static/js/5.1c25fd11.chunk.js",
+    "static/js/6.469b46bb.chunk.js": "/thuocsi_cs/static/js/6.469b46bb.chunk.js",
+    "static/js/7.7eed4910.chunk.js": "/thuocsi_cs/static/js/7.7eed4910.chunk.js",
+    "static/js/8.e89b124b.chunk.js": "/thuocsi_cs/static/js/8.e89b124b.chunk.js",
+    "index.html": "/thuocsi_cs/index.html",
+    "precache-manifest.d16a50b0864ab99e4b527a52b7be5a5f.js": "/thuocsi_cs/precache-manifest.d16a50b0864ab99e4b527a52b7be5a5f.js",
+    "service-worker.js": "/thuocsi_cs/service-worker.js",
+    "static/js/0.eea486eb.chunk.js.LICENSE.txt": "/thuocsi_cs/static/js/0.eea486eb.chunk.js.LICENSE.txt",
+    "static/js/3.a9a0f724.chunk.js.LICENSE.txt": "/thuocsi_cs/static/js/3.a9a0f724.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/thuocsi_cs/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/logo_thuocsi.svg": "/thuocsi_cs/static/media/logo_thuocsi.d8a7f08a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4b38ff64.js",
+    "static/css/3.b4121498.chunk.css",
+    "static/js/3.a9a0f724.chunk.js",
+    "static/css/main.ee46842a.chunk.css",
+    "static/js/main.de3f3ca9.chunk.js"
+  ]
+}
